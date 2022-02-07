@@ -5,7 +5,7 @@
   <title>Formulario Login</title>
   <meta charset="UTF-8">
   <script type="text/javascript" src="../js/validacion_login.js"></script>
-  <link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
+  <link rel="stylesheet" href="{!! asset('css/styles_login.css') !!}">
 </head>
 <body class="login">
   <div class="row flex-cv">

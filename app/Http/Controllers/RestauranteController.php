@@ -42,7 +42,7 @@ class RestauranteController extends Controller
 
     /*Mostrar*/
     public function mostrarRestaurante(){
-        $listaRestaurante = DB::table('tbl_resta')->select('id_gerente_fk')->select('id_tipo_fk')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')/*->join('tbl_rol','tbl_user.id_usu','=','tbl_rol.id_rol')*/->select('*')->get();
+        $listaRestaurante = DB::table('tbl_resta')->select('id_tipo_fk')->select('id_gerente_fk')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')->join('tbl_tipo','tbl_resta.id_tipo_fk','=','tbl_tipo.id_tipo')->select('*')->get();
         return view('mostrar', compact('listaRestaurante'));
         //return $listaRestaurante;
     }
@@ -52,7 +52,7 @@ class RestauranteController extends Controller
         return view('crear');
     }
 
-    public function crearRestaurantePost(RestauranteCrear  $request){
+    public function crearRestaurantePost(Request  $request){
         $datos = $request->except('_token');
         $request->validate([
             'nom_resta'=>'required|string|max:30',
@@ -98,26 +98,29 @@ class RestauranteController extends Controller
 
     /*Actualizar*/
     public function modificarRestaurante($id){
-        $restaurante=DB::table('tbl_resta')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')->select()->where('id_resta','=',$id)->first();
-        return view('modificar', compact('restaurante'));
+        $restaurante=DB::table('tbl_resta')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')->join('tbl_tipo','tbl_resta.id_tipo_fk','=','tbl_tipo.id_tipo')->select()->where('id_resta','=',$id)->first();
+        $user=DB::table('tbl_user')->join('tbl_rol','tbl_user.id_rol_fk','=','tbl_rol.id_rol')->select()->where('id_rol','=',$id)->first();
+        $tipo=DB::table('tbl_tipo')->join('tbl_resta','tbl_tipo.id_tipo','=','tbl_resta.id_tipo_fk')->select()->where('id_tipo','=',$id)->first();
+        return view('modificar', compact('restaurante','user','tipo'));
     }
 
     public function modificarRestaurantePut(Request $request){
         $datos=$request->except('_token','_method');
         if ($request->hasFile('foto_resta')) {
-            $foto = DB::table('tbl_resta')->select('foto_resta')->where('id','=',$request['id'])->first();
+            $foto = DB::table('tbl_resta')->select('foto_resta')->where('id_resta','=',$request['id_resta'])->first();
             if ($foto->foto_resta != null) {
                 Storage::delete('public/'.$foto->foto_resta);
             }
             $datos['foto_resta'] = $request->file('foto_resta')->store('uploads','public');
         }else{
-            $foto = DB::table('tbl_resta')->select('foto_resta')->where('id','=',$request['id_resta'])->first();
+            $foto = DB::table('tbl_resta')->select('foto_resta')->where('id_resta','=',$request['id_resta'])->first();
             $datos['foto_resta'] = $foto->foto_resta;
         }
-        $datostelf=$request->except('_token','_method','nom_resta','ciudad_resta','ubi_resta','telf_resta','precio_resta','foto_resta','id_gerente_fk','id_tipo_fk','cp_resta','id_resta');
+        //$datosresta=$request->except('_token','_method','nom_resta','ciudad_resta','ubi_resta','telf_resta','precio_resta','foto_resta','id_gerente_fk','id_tipo_fk','cp_resta','id_resta');
         try {
             DB::beginTransaction();
-            DB::table('tbl_telef')->where('id_telf','=',$datostelf['id_telf'])->update($datostelf);
+            //DB::table('tbl_tipo')->where('id_tipo','=',$datosresta['id_tipo'])->update($datosresta);
+            //DB::table('tbl_user')->where('id_','=',$datos['id_resta'])->update($datos);
             DB::table('tbl_resta')->where('id_resta','=',$datos['id_resta'])->update($datos);
             DB::commit();
         } catch (\Exception $e) {

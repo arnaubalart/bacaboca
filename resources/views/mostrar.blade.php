@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Mostrar Restaurante</title>
-    <link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
+    <link rel="stylesheet" href="{!! asset('css/styles_login.css') !!}">
 </head>
 <body>
     <div>
@@ -26,7 +26,6 @@
     <div class="mostrar">
         <div class="row flex-cv">
             <table class="table">
-                <thead class="thead-dark">
                     <tr class="active">
                         <th>ID</th>
                         <th>NOMBRE</th>
@@ -51,9 +50,9 @@
                         <td>{{$restaurante->ubi_resta}}</td>
                         <td>{{$restaurante->telf_resta}}</td>
                         <td>{{$restaurante->precio_resta}}</td>
-                        <td style="padding: auto; text-align: center"><img src="{{asset('storage').'/'.$restaurante->foto_resta}}" width="300"></td>
-                        <td>{{$restaurante->id_gerente_fk}}</td>
-                        <td>{{$restaurante->id_tipo_fk}}</td>
+                        <td style="padding: auto; text-align: center"><img src="{{asset('storage').'/uploads/'.$restaurante->foto_resta}}" width="100"></td>
+                        <td>{{$restaurante->nombre_usu}}</td>
+                        <td>{{$restaurante->nom_tipo}}</td>
                         <td>{{$restaurante->cp_resta}}</td>
                         <td><form action="{{url('eliminarRestaurante/'.$restaurante->id_resta)}}" method="POST">
                             @csrf
