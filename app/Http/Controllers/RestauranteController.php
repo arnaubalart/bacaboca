@@ -6,6 +6,7 @@ use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RestauranteCrear;
+use Illuminate\Support\Facades\Storage;
 
 class RestauranteController extends Controller
 {
@@ -20,7 +21,7 @@ class RestauranteController extends Controller
         if($user == 1){
             //Establecemos session y lo enviamos a la pag que toca
             $rol = DB::table("tbl_user")->select('id_rol_fk')->where('email_usu','=',$datos['email_usu'])->where('contra_usu','=',MD5($datos['contra_usu']))->first();
-            if($rol->id_rol_fk =="1"){
+            if($rol->id_rol_fk == 1){
                 $request->session()->put('nombre_admin',$request->email_usu);
             }
             return redirect('/mostrar');
@@ -39,8 +40,9 @@ class RestauranteController extends Controller
         return redirect('/');
     }
 
+    /*Mostrar*/
     public function mostrarRestaurante(){
-        $listaRestaurante = DB::table('tbl_resta')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')->join('tbl_rol','tbl_user.id_usu','=','tbl_rol.id_rol')->select('*')->get();
+        $listaRestaurante = DB::table('tbl_resta')->select('id_gerente_fk')->select('id_tipo_fk')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')/*->join('tbl_rol','tbl_user.id_usu','=','tbl_rol.id_rol')*/->select('*')->get();
         return view('mostrar', compact('listaRestaurante'));
         //return $listaRestaurante;
     }
@@ -88,6 +90,37 @@ class RestauranteController extends Controller
             DB::table('tbl_resta')->where('id_resta','=',$id)->delete();
             DB::commit();
         }catch(\Exception $e){
+            DB::rollBack();
+            return $e->getMessage();
+        }
+        return redirect('mostrar');
+    }
+
+    /*Actualizar*/
+    public function modificarRestaurante($id){
+        $restaurante=DB::table('tbl_resta')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')->select()->where('id_resta','=',$id)->first();
+        return view('modificar', compact('restaurante'));
+    }
+
+    public function modificarRestaurantePut(Request $request){
+        $datos=$request->except('_token','_method');
+        if ($request->hasFile('foto_resta')) {
+            $foto = DB::table('tbl_resta')->select('foto_resta')->where('id','=',$request['id'])->first();
+            if ($foto->foto_resta != null) {
+                Storage::delete('public/'.$foto->foto_resta);
+            }
+            $datos['foto_resta'] = $request->file('foto_resta')->store('uploads','public');
+        }else{
+            $foto = DB::table('tbl_resta')->select('foto_resta')->where('id','=',$request['id_resta'])->first();
+            $datos['foto_resta'] = $foto->foto_resta;
+        }
+        $datostelf=$request->except('_token','_method','nom_resta','ciudad_resta','ubi_resta','telf_resta','precio_resta','foto_resta','id_gerente_fk','id_tipo_fk','cp_resta','id_resta');
+        try {
+            DB::beginTransaction();
+            DB::table('tbl_telef')->where('id_telf','=',$datostelf['id_telf'])->update($datostelf);
+            DB::table('tbl_resta')->where('id_resta','=',$datos['id_resta'])->update($datos);
+            DB::commit();
+        } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
         }

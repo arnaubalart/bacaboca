@@ -27,7 +27,12 @@ Route::get('/crear',[RestauranteController::class, 'crearRestaurante']);
 Route::post('/crear',[RestauranteController::class, 'crearRestaurantePost']);
 
 /*Mostrar*/
-Route::get('/mostrar',[RestauranteController::class, 'mostrarRestaurante']);
+Route::get('mostrar',[RestauranteController::class, 'mostrarRestaurante']);
 
 /*Eliminar*/
 Route::delete('/eliminarRestaurante/{id}', [RestauranteController::class, 'eliminarRestaurante']);
+
+/*Actualizar*/
+Route::get('/modificarRestaurante/{id}', [RestauranteController::class, 'modificarRestaurante']);
+
+Route::put('/modificarRestaurante',[RestauranteController::class, 'modificarRestaurantePut']);

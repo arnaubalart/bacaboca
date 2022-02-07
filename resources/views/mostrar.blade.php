@@ -14,58 +14,61 @@
     <title>Mostrar Restaurante</title>
     <link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
 </head>
-<body class="mostrar">
+<body>
     <div>
         <form action="{{url('crear')}}" method="GET">
-            <button class= "botonCre" type="submit" name="Crear" value="Crear">Crear</button>
+            <button class="btn btn-primary" type="submit" name="Crear" value="Crear">Crear</button>
         </form>
         <form action="{{url('logout')}}" method="GET">
-            <button id="logout" class= "botonCre" type="submit" name="logout" value="logout">Logout</button>
+            <button id="logout" class="btn btn-dark" type="submit" name="logout" value="logout">Logout</button>
         </form>
     </div>
-    <div class="row flex-cv">
-        <table class="table">
-            <tr class="active">
-                <th>ID</th>
-                <th>NOMBRE</th>
-                <th>CIUDAD</th>
-                <th>DIRECCION</th>
-                <th>UBICACION</th>
-                <th>TELEFONO</th>
-                <th>PRECIO CARTA</th>
-                <th>FOTO</th>
-                <th>GERENTE</th>
-                <th>TIPO DE RESTAURANTE</th>
-                <th>CODIGO POSTAL</th>
-                <th>ELIMINAR</th>
-                <th>MODIFICAR</th>
-            </tr>
-            @foreach($listaRestaurante as $restaurante)
-                <tr>
-                    <td>{{$restaurante->id_resta}}</td>
-                    <td>{{$restaurante->nom_resta}}</td>
-                    <td>{{$restaurante->ciudad_resta}}</td>
-                    <td>{{$restaurante->direccion_resta}}</td>
-                    <td>{{$restaurante->ubi_resta}}</td>
-                    <td>{{$restaurante->telf_resta}}</td>
-                    <td>{{$restaurante->precio_resta}}</td>
-                    <td style="padding: auto; text-align: center"><img src="{{asset('storage').'/'.$restaurante->foto_resta}}" width="100"></td>
-                    <td>{{$restaurante->id_gerente_fk}}</td>
-                    <td>{{$restaurante->id_tipo_fk}}</td>
-                    <td>{{$restaurante->cp_resta}}</td>
-                    <td><form action="{{url('eliminarRestaurante/'.$restaurante->id_resta)}}" method="POST">
-                        @csrf
-                        <!--{{csrf_field()}}--->
-                        {{method_field('DELETE')}}
-                        <!--@method('DELETE')--->
-                        <button class= "botonEli" type="submit" name="Eliminar" value="Eliminar">Eliminar</button>
-                    </form></td>
-                    <td><form action="{{url('modificarRestaurante/'.$restaurante->id_resta)}}" method="GET">
-                        <button class= "botonAct" type="submit" name="Modificar" value="Modificar">Modificar</button>
-                    </form></td>
-                </tr>
-            @endforeach
-        </table>
+    <div class="mostrar">
+        <div class="row flex-cv">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr class="active">
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>CIUDAD</th>
+                        <th>DIRECCION</th>
+                        <th>UBICACION</th>
+                        <th>TELEFONO</th>
+                        <th>PRECIO CARTA</th>
+                        <th>FOTO</th>
+                        <th>GERENTE</th>
+                        <th>TIPO DE RESTAURANTE</th>
+                        <th>CODIGO POSTAL</th>
+                        <th>ELIMINAR</th>
+                        <th>MODIFICAR</th>
+                    </tr>
+                @foreach($listaRestaurante as $restaurante)
+                    <tr>
+                        <td>{{$restaurante->id_resta}}</td>
+                        <td>{{$restaurante->nom_resta}}</td>
+                        <td>{{$restaurante->ciudad_resta}}</td>
+                        <td>{{$restaurante->direccion_resta}}</td>
+                        <td>{{$restaurante->ubi_resta}}</td>
+                        <td>{{$restaurante->telf_resta}}</td>
+                        <td>{{$restaurante->precio_resta}}</td>
+                        <td style="padding: auto; text-align: center"><img src="{{asset('storage').'/'.$restaurante->foto_resta}}" width="300"></td>
+                        <td>{{$restaurante->id_gerente_fk}}</td>
+                        <td>{{$restaurante->id_tipo_fk}}</td>
+                        <td>{{$restaurante->cp_resta}}</td>
+                        <td><form action="{{url('eliminarRestaurante/'.$restaurante->id_resta)}}" method="POST">
+                            @csrf
+                            <!--{{csrf_field()}}--->
+                            {{method_field('DELETE')}}
+                            <!--@method('DELETE')--->
+                            <button class="btn btn-outline-danger" type="submit" name="Eliminar" value="Eliminar">Eliminar</button>
+                        </form></td>
+                        <td><form action="{{url('modificarRestaurante/'.$restaurante->id_resta)}}" method="GET">
+                            <button class="btn btn-outline-secondary" type="submit" name="Modificar" value="Modificar">Modificar</button>
+                        </form></td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
     </div>
 </body>
 </html>
