@@ -1,0 +1,454 @@
+@font-face {
+  font-family: 'Uber-Move-Text';
+  src: url("../font/UberMoveText-Regular.woff2") format("woff2"), url("../font/UberMoveText-Regular.woff") format("woff"), url("../font/UberMoveText-Regular.ttf") format("truetype"), url("../font/UberMoveText-Regular.svg#UberMoveText-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Uber-Move-Text';
+  src: url("../font/UberMoveText-Light.woff2") format("woff2"), url("../font/UberMoveText-Light.woff") format("woff"), url("../font/UberMoveText-Light.ttf") format("truetype"), url("../font/UberMoveText-Light.svg#UberMoveText-Light") format("svg");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Uber-Move-Text';
+  src: url("../font/UberMoveText-Bold.woff2") format("woff2"), url("../font/UberMoveText-Bold.woff") format("woff"), url("../font/UberMoveText-Bold.ttf") format("truetype"), url("../font/UberMoveText-Bold.svg#UberMoveText-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Uber-Move-Text';
+  src: url("../font/UberMoveText-Medium.woff2") format("woff2"), url("../font/UberMoveText-Medium.woff") format("woff"), url("../font/UberMoveText-Medium.ttf") format("truetype"), url("../font/UberMoveText-Medium.svg#UberMoveText-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hide {
+  display: none;
+}
+
+.flex-cv, .container-list-restaurantes .grid-restaurantes .item-restaurant .info-restaurante small {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  justify-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.shadow1 {
+  -webkit-box-shadow: 0 5px 10px rgba(39, 40, 44, 0.05), 0 15px 40px rgba(64, 66, 73, 0.2);
+          box-shadow: 0 5px 10px rgba(39, 40, 44, 0.05), 0 15px 40px rgba(64, 66, 73, 0.2);
+}
+
+.shadow1:hover {
+  -webkit-box-shadow: 0 7px 15px rgba(33, 34, 37, 0.05), 0 20px 45px rgba(48, 49, 54, 0.2);
+          box-shadow: 0 7px 15px rgba(33, 34, 37, 0.05), 0 20px 45px rgba(48, 49, 54, 0.2);
+}
+
+.scale {
+  -webkit-transition: 0.7s -webkit-transform;
+  transition: 0.7s -webkit-transform;
+  transition: 0.7s transform;
+  transition: 0.7s transform, 0.7s -webkit-transform;
+}
+
+.scale:hover {
+  -webkit-transition: 0.7s -webkit-transform;
+  transition: 0.7s -webkit-transform;
+  transition: 0.7s transform;
+  transition: 0.7s transform, 0.7s -webkit-transform;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.shadow2 {
+  -webkit-box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+          box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
+}
+
+:root {
+  --first-color: #19c673;
+  --second-color: #05a357;
+  --third-color: #f6f0ea;
+  --fourth-color: #7319c6;
+  --fifth-color: #c67319;
+  --sixth-color: #19c3c6;
+  --seventh-color: #19c61d;
+  --eightth-color: #c6196c;
+  --white: #ffffff;
+  --black: #000000;
+  --grey: #eee;
+  --letter-grey: #797c7e;
+  --fuente1: 'Uber-Move-Text', sans-serif;
+  --size-standar: calc(12px + 0.2vw);
+  --size-medium: calc(15px + 0.2vw);
+}
+
+/*  MIXINS
+========================================== */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--first-color);
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--third-color);
+}
+
+* {
+  font-family: var(--fuente1);
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.overlay {
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.411);
+  opacity: 0;
+}
+
+.overlay.active {
+  z-index: 10;
+  opacity: 1;
+}
+
+.sidenav {
+  position: absolute;
+  height: 100%;
+  width: 20vw;
+  -webkit-transition: 1s all;
+  transition: 1s all;
+  left: -21vw;
+  z-index: 15;
+  opacity: 0;
+  background-color: var(--black);
+}
+
+.sidenav.open {
+  display: block;
+  left: 0;
+  opacity: 1;
+}
+
+menu {
+  height: 9.3333vh;
+  background: var(--white);
+  max-width: 1920px;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+}
+
+menu .container-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+menu .container-menu .burger .boton-burger {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+menu .container-menu .burger .boton-burger .line {
+  fill: none;
+  stroke: var(--black);
+  stroke-width: 6;
+  -webkit-transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+menu .container-menu .burger .boton-burger .line1 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+
+menu .container-menu .burger .boton-burger .line2 {
+  stroke-dasharray: 60 60;
+  stroke-width: 6;
+}
+
+menu .container-menu .burger .boton-burger .line3 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+
+menu .container-menu .burger .boton-burger.opened .line1 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+
+menu .container-menu .burger .boton-burger.opened .line2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+  stroke-width: 6;
+}
+
+menu .container-menu .burger .boton-burger.opened .line3 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+
+menu .container-menu .logo img {
+  height: 90px;
+  width: auto;
+}
+
+menu .container-menu .search-top {
+  padding: 1px 15px;
+  margin: 20px 15px;
+  background: var(--grey);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 40vw;
+}
+
+menu .container-menu .search-top svg {
+  margin-right: 5px;
+}
+
+menu .container-menu .search-top input {
+  background: transparent;
+  width: 100%;
+}
+
+menu .container-menu .search-top input:focus-visible {
+  border: none;
+  outline: none;
+}
+
+menu .container-menu .login button {
+  padding: 12px 16px;
+  border-radius: 500px;
+  background: #eee;
+  font-size: calc(12px + 0.2vw);
+}
+
+menu .container-menu .login button:active {
+  background: #CBCBCB;
+}
+
+menu .container-menu .login button:focus, menu .container-menu .login button:focus-within {
+  outline: none;
+}
+
+menu .container-menu .login button:target {
+  outline: none;
+}
+
+menu .container-menu .login button:hover {
+  background: #E2E2E2;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: calc(100vh);
+  max-width: 1920px;
+  margin-top: 9.3333vh;
+}
+
+header .search-header {
+  padding: 1px 15px;
+  margin: 20px 15px;
+  background: var(--grey);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 40vw;
+}
+
+header .search-header svg {
+  margin-right: 5px;
+}
+
+header .search-header input {
+  background: transparent;
+  width: 100%;
+}
+
+header .search-header input:focus-visible {
+  border: none;
+  outline: none;
+}
+
+header .bg-svg {
+  width: 33.33%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -10;
+}
+
+header .bg-svg.left {
+  left: 0;
+}
+
+header .bg-svg.right {
+  right: 0;
+}
+
+.item-cousine {
+  width: 80%;
+  height: 75px;
+  margin: 5px auto;
+  background: var(--third-color);
+}
+
+.item-cousine input[type="checkbox"] {
+  display: none;
+}
+
+.item-cousine input[type="checkbox"] + label {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-size: 100px;
+  position: relative;
+  cursor: pointer;
+  font-size: var(--size-medium);
+  background-image: url(../../public/storage/web/comidas/china.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: right;
+}
+
+.item-cousine input[type="checkbox"] + label:after {
+  content: " ";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.item-cousine input[type="checkbox"]:checked + label:after {
+  border: solid var(--second-color) 4px;
+}
+
+.container-list-restaurantes {
+  padding: 10px;
+  margin: 40px;
+}
+
+.container-list-restaurantes .grid-restaurantes {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-gap: 15px 20px;
+}
+
+.container-list-restaurantes .grid-restaurantes .item-restaurant {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+}
+
+.container-list-restaurantes .grid-restaurantes .item-restaurant img {
+  height: 100%;
+  width: 30%;
+}
+
+.container-list-restaurantes .grid-restaurantes .item-restaurant .info-restaurante {
+  padding: 5px 5px 5px 10px;
+}
+
+.container-list-restaurantes .grid-restaurantes .item-restaurant .info-restaurante h4 {
+  width: 100%;
+  font-size: var(--size-medium);
+  font-weight: 500;
+}
+
+.container-list-restaurantes .grid-restaurantes .item-restaurant .info-restaurante h6 {
+  color: var(--letter-grey);
+  font-size: var(--size-standar);
+}
+
+.container-list-restaurantes .grid-restaurantes .item-restaurant .info-restaurante small {
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-clip-path: circle(50% at 50% 50%);
+          clip-path: circle(50% at 50% 50%);
+  background: var(--grey);
+  width: 30px;
+  height: 30px;
+}
+
+footer {
+  background: var(--black);
+}
+/*# sourceMappingURL=styles.css.map */
