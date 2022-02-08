@@ -49,7 +49,9 @@ class RestauranteController extends Controller
 
     /*Crear*/
     public function crearRestaurante(){
-        return view('crear');
+        $user=DB::select('select u.id_usu, u.nombre_usu from tbl_user u inner join tbl_rol r on u.id_rol_fk=r.id_rol where u.id_rol_fk=3;');
+        $tipo=DB::select('select id_tipo, nom_tipo from tbl_tipo;');
+        return view('crear', compact('user','tipo'));
     }
 
     public function crearRestaurantePost(Request  $request){
@@ -57,10 +59,10 @@ class RestauranteController extends Controller
         $request->validate([
             'nom_resta'=>'required|string|max:30',
             'ciudad_resta'=>'required|string|max:30',
-            'direccion_resta'=>'required|string|max:10|min:10',
-            'ubi_resta'=>'required|int|min:18|max:130',
+            'direccion_resta'=>'required|string|max:200',
+            'ubi_resta'=>'required|string|max:130',
             'telf_resta'=>'required|string|min:9|max:9',
-            'precio_resta'=>'required|string|min:9|max:9',
+            'precio_resta'=>'required|string|min:1|max:3',
             'foto_resta'=>'required|mimes:jpg,png,jpeg,webp,svg,gif',
             'id_gerente_fk'=>'required|',
             'id_tipo_fk'=>'required|',
@@ -80,7 +82,7 @@ class RestauranteController extends Controller
             DB::rollBack();
             return $e->getMessage();
         }
-        //return redirect('mostrar');
+        return redirect('mostrar');
     }
 
     /*Eliminar*/
@@ -99,8 +101,8 @@ class RestauranteController extends Controller
     /*Actualizar*/
     public function modificarRestaurante($id){
         $restaurante=DB::table('tbl_resta')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')->join('tbl_tipo','tbl_resta.id_tipo_fk','=','tbl_tipo.id_tipo')->select()->where('id_resta','=',$id)->first();
-        $user=DB::table('tbl_user')->join('tbl_rol','tbl_user.id_rol_fk','=','tbl_rol.id_rol')->select()->where('id_rol','=',$id)->first();
-        $tipo=DB::table('tbl_tipo')->join('tbl_resta','tbl_tipo.id_tipo','=','tbl_resta.id_tipo_fk')->select()->where('id_tipo','=',$id)->first();
+        $user=DB::select('select u.id_usu, u.nombre_usu from tbl_user u inner join tbl_rol r on u.id_rol_fk=r.id_rol where u.id_rol_fk=3;');
+        $tipo=DB::select('select id_tipo, nom_tipo from tbl_tipo;');
         return view('modificar', compact('restaurante','user','tipo'));
     }
 
@@ -116,11 +118,9 @@ class RestauranteController extends Controller
             $foto = DB::table('tbl_resta')->select('foto_resta')->where('id_resta','=',$request['id_resta'])->first();
             $datos['foto_resta'] = $foto->foto_resta;
         }
-        //$datosresta=$request->except('_token','_method','nom_resta','ciudad_resta','ubi_resta','telf_resta','precio_resta','foto_resta','id_gerente_fk','id_tipo_fk','cp_resta','id_resta');
+        
         try {
             DB::beginTransaction();
-            //DB::table('tbl_tipo')->where('id_tipo','=',$datosresta['id_tipo'])->update($datosresta);
-            //DB::table('tbl_user')->where('id_','=',$datos['id_resta'])->update($datos);
             DB::table('tbl_resta')->where('id_resta','=',$datos['id_resta'])->update($datos);
             DB::commit();
         } catch (\Exception $e) {

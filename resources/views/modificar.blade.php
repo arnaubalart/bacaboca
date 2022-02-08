@@ -13,7 +13,7 @@
         @csrf
         {{method_field('PUT')}}
         <p>Nombre</p>
-        <input type="text" name="nom_resta" value="{{$restaurante->nom_resta}}">
+        <input class="btn-outline-success" type="text" name="nom_resta" value="{{$restaurante->nom_resta}}">
         <p>Ciudad</p>
         <input class="btn-outline-success" type="text" name="ciudad_resta" value="{{$restaurante->ciudad_resta}}">
         <p>Dirección</p>
@@ -26,35 +26,31 @@
             <select class="btn-outline-success" name="precio_resta" id="precio_resta">
                 <option value="{{$restaurante->precio_resta}}" selected >{{$restaurante->precio_resta}}</option>
                 <option value="€">€</option>
-                <option value="€">€€</option>
-                <option value="€">€€€</option>
+                <option value="€€">€€</option>
+                <option value="€€€">€€€</option>
             </select>
         <p>Foto</p>
         <input type="file" name="foto_resta" value="{{$restaurante->foto_resta}}">
         <p>Gerente</p>
-            <select class="btn-outline-success" name="id_gerente_fk" id="id_gerente_fk">
-                <option value="{{$restaurante->id_gerente_fk}}" selected>{{$restaurante->nombre_usu}}</option>
-                <option value="{{$restaurante->id_gerente_fk}}">Roberto</option>
-                <option value="{{$restaurante->id_gerente_fk}}">Fernanda</option>
-                <option value="{{$restaurante->id_gerente_fk}}">Julia</option>
-                <option value="{{$restaurante->id_gerente_fk}}">Pablo</option>
-                <option value="{{$restaurante->id_gerente_fk}}">Silvia</option>
-                <option value="{{$restaurante->id_gerente_fk}}">Carla</option>
-                <option value="{{$restaurante->id_gerente_fk}}">Pedro</option>
-                <option value="{{$restaurante->id_gerente_fk}}">Julian</option>
-            </select>
+        <select class="btn-outline-success" name="id_gerente_fk" id="id_gerente_fk">
+            @foreach ($user as $gerente)
+                @if ($restaurante->nombre_usu == $gerente->nombre_usu)
+                    <option value="{{$restaurante->id_usu}}" selected>{{$restaurante->nombre_usu}}</option>
+                @else
+                    <option value="{{$gerente->id_usu}}">{{$gerente->nombre_usu}}</option>
+                @endif   
+            @endforeach
+        </select>
         <p>Tipo de restaurante</p>
-            <select class="btn-outline-success" name="id_tipo_fk" id="id_tipo_fk">
-                <option value="{{$restaurante->id_tipo_fk}}" selected >{{$restaurante->nom_tipo}}</option>
-                <option value="{{$restaurante->id_tipo_fk}}">Americano</option>
-                <option value="{{$restaurante->id_tipo_fk}}">Mejicano</option>
-                <option value="{{$restaurante->id_tipo_fk}}">Chino</option>
-                <option value="{{$restaurante->id_tipo_fk}}">Kebab</option>
-                <option value="{{$restaurante->id_tipo_fk}}">Pollo</option>
-                <option value="{{$restaurante->id_tipo_fk}}">Japones</option>
-                <option value="{{$restaurante->id_tipo_fk}}">Italiano</option>
-                <option value="{{$restaurante->id_tipo_fk}}">Veggie</option>
-            </select>
+        <select class="btn-outline-success" name="id_tipo_fk" id="id_tipo_fk">
+            @foreach ($tipo as $type)
+                @if ($restaurante->nom_tipo == $type->nom_tipo)
+                    <option value="{{$restaurante->id_tipo}}" selected>{{$restaurante->nom_tipo}}</option>
+                @else
+                    <option value="{{$type->id_tipo}}">{{$type->nom_tipo}}</option>
+                @endif   
+            @endforeach
+        </select>
         <p>Codigo postal</p>
         <input class="btn-outline-success" type="number" name="cp_resta" value="{{$restaurante->cp_resta}}">
         <div>

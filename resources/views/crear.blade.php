@@ -20,66 +20,42 @@
     @endif
     <form class="cuadro_login" action="{{url('crear')}}" method="post" enctype="multipart/form-data">
         @csrf
+        {{method_field('POST')}}
         <p>Nombre del restaurante</p>
-        <input type="text" name="nom_resta" placeholder="Introduce el nombre del restaurante" value="{{old('nom_resta')}}">
-        @error('nom_resta')
-            <br>
-            {{$message}}
-        @enderror
+            <input class="btn-outline-success" type="text" name="nom_resta" placeholder="Introduce el nombre del restaurante" value="{{old('nom_resta')}}">
         <p>Ciudad</p>
-        <input type="text" name="ciudad_resta" placeholder="Introduce la ciudad donde se ubica el restaurante">
-        @error('ciudad_resta')
-            <br>
-            {{$message}}
-        @enderror
+            <input class="btn-outline-success" type="text" name="ciudad_resta" placeholder="Introduce la ciudad donde se ubica el restaurante">
         <p>Dirección</p>
-        <input type="text" name="direccion_resta" placeholder="Introduce la dirección del restaurante">
-        @error('direccion_resta')
-            <br>
-            {{$message}}
-        @enderror
+            <input class="btn-outline-success" type="text" name="direccion_resta" placeholder="Introduce la dirección del restaurante">
         <p>Ubicación</p>
-        <input type="number" name="ubi_resta" placeholder="Introduce la ubicación del restaurante">
-        @error('ubi_resta')
-            <br>
-            {{$message}}
-        @enderror
+            <input class="btn-outline-success" type="text" name="ubi_resta" placeholder="Introduce la ubicación del restaurante">
         <p>Telefono</p>
-        <input type="number" name="telf_resta" placeholder="Introduce el numero de telefono del restaurante">
-        @error('telf_resta')
-            <br>
-            {{$message}}
-        @enderror
+            <input class="btn-outline-success" type="number" name="telf_resta" placeholder="Introduce el numero de telefono del restaurante">
         <p>Precio</p>
-        <input type="number" name="precio_resta" placeholder="Selecciona el precio del restaurante">
-        @error('precio_resta')
-            <br>
-            {{$message}}
-        @enderror
+            <select class="btn-outline-success" name="precio_resta" id="precio_resta">
+                <option value="" selected >Seleccione el precio del restaurante</option>
+                <option value="€">€</option>
+                <option value="€">€€</option>
+                <option value="€">€€€</option>
+            </select>
         <p>Foto</p>
-        <input type="file" name="foto_resta">
-        @error('foto_resta')
-            <br>
-            {{$message}}
-        @enderror
-        <p>Gerente del restaurante</p>
-        <input type="text" name="id_gerente_fk" placeholder="Selecciona el gerente del restaurante">
-        @error('id_gerente_fk')
-            <br>
-            {{$message}}
-        @enderror
+            <input type="file" name="foto_resta">
+        <p>Gerente</p>
+            <select class="btn-outline-success" name="id_gerente_fk" id="id_gerente_fk">
+                <option>Seleccione un gerente</option>
+                @foreach ($user as $gerente)
+                    <option value="{{$gerente->id_usu}}">{{$gerente->nombre_usu}}</option>
+                @endforeach
+            </select>
         <p>Tipo de restaurante</p>
-        <input type="text" name="id_tipo_fk" placeholder="Selecciona el tipo de restaurante">
-        @error('id_tipo_fk')
-            <br>
-            {{$message}}
-        @enderror
+            <select class="btn-outline-success" name="id_tipo_fk" id="id_tipo_fk">
+                <option>Seleccione el tipo de restaurante</option>
+                @foreach ($tipo as $type)
+                    <option value="{{$type->id_tipo}}">{{$type->nom_tipo}}</option> 
+                @endforeach
+            </select>
         <p>Código postal del restaurante</p>
-        <input type="text" name="cp_resta" placeholder="Introduce el código postal del restaurante">
-        @error('cp_resta')
-            <br>
-            {{$message}}
-        @enderror
+        <input class="btn-outline-success" type="number" name="cp_resta" placeholder="Introduce el código postal del restaurante">
         <div>
             <input type="submit" value="Enviar">
         </div>
