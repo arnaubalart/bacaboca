@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RestauranteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('filtro');
 });
+
+
+Route::post('filtro',[RestauranteController::class, 'filtroController']);//FILTRO
