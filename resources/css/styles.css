@@ -165,17 +165,23 @@ body {
 menu {
   height: 9.3333vh;
   background: var(--white);
-  max-width: 1920px;
   margin: 0 auto;
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
   top: 0;
   z-index: 5;
+  width: 100%;
 }
 
 menu .container-menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  max-width: 1920px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
 }
 
 menu .container-menu .burger .boton-burger {
@@ -234,7 +240,7 @@ menu .container-menu .logo img {
   width: auto;
 }
 
-menu .container-menu .search-top {
+menu .container-menu .container-search-top .search-top {
   padding: 1px 15px;
   margin: 20px 15px;
   background: var(--grey);
@@ -250,16 +256,16 @@ menu .container-menu .search-top {
   width: 40vw;
 }
 
-menu .container-menu .search-top svg {
+menu .container-menu .container-search-top .search-top svg {
   margin-right: 5px;
 }
 
-menu .container-menu .search-top input {
+menu .container-menu .container-search-top .search-top input {
   background: transparent;
   width: 100%;
 }
 
-menu .container-menu .search-top input:focus-visible {
+menu .container-menu .container-search-top .search-top input:focus-visible {
   border: none;
   outline: none;
 }
@@ -303,7 +309,8 @@ header {
           align-items: center;
   height: calc(100vh);
   max-width: 1920px;
-  margin-top: 9.3333vh;
+  margin: auto;
+  position: relative;
 }
 
 header .search-header {
@@ -336,19 +343,35 @@ header .search-header input:focus-visible {
   outline: none;
 }
 
-header .bg-svg {
-  width: 33.33%;
+header .bg-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background: #fff2d9;
+}
+
+header .bg-header .bg-svg {
   height: 100%;
   position: absolute;
   top: 0;
   z-index: -10;
 }
 
-header .bg-svg.left {
+header .bg-header .bg-svg img {
+  height: 100%;
+  width: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+header .bg-header .bg-svg.left {
   left: 0;
 }
 
-header .bg-svg.right {
+header .bg-header .bg-svg.right {
   right: 0;
 }
 
