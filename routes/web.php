@@ -20,3 +20,25 @@ Route::get('/', function () {
 
 
 Route::post('filtro',[RestauranteController::class, 'filtroController']);//FILTRO
+/*LogIn y LogOut*/
+Route::get('',[RestauranteController::class, 'login']);
+
+Route::post('login',[RestauranteController::class, 'loginPost']);
+
+Route::get('logout',[RestauranteController::class, 'logout']);
+
+/*Crear*/
+Route::get('/crear',[RestauranteController::class, 'crearRestaurante']);
+
+Route::post('/crear',[RestauranteController::class, 'crearRestaurantePost']);
+
+/*Mostrar*/
+Route::get('mostrar',[RestauranteController::class, 'mostrarRestaurante']);
+
+/*Eliminar*/
+Route::delete('/eliminarRestaurante/{id}', [RestauranteController::class, 'eliminarRestaurante']);
+
+/*Actualizar*/
+Route::get('/modificarRestaurante/{id}', [RestauranteController::class, 'modificarRestaurante']);
+
+Route::put('/modificarRestaurante',[RestauranteController::class, 'modificarRestaurantePut']);
