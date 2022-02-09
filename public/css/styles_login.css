@@ -81,7 +81,8 @@ body {
 
 /* mensaje de alerta JS Login */
 
-#mensaje {
+.alert {
     color: rgb(255, 0, 0);
-    font-size: 15px;
+    font-size: 20px;
+    font: bold;
 }

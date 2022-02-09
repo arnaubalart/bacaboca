@@ -23,7 +23,7 @@
         {{method_field('POST')}}
         <p>Nombre del restaurante</p>
             <input class="btn-outline-success" type="text" name="nom_resta" placeholder="Introduce el nombre del restaurante" value="{{old('nom_resta')}}">
-        @error('nom_resta')
+            @error('nom_resta')
                 <br>
                 {{$message}}
             @enderror

@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
 {
+    /*Mostrar*/
+    public function mostrarUsuario(){
+        $listaUsuario = DB::table('tbl_user')->select('id_rol_fk')->join('tbl_rol','tbl_user.id_rol_fk','=','tbl_rol.id_rol')->select('*')->get();
+        return view('mostrarUser', compact('listaUsuario'));
+        //return $listaUsuario;
+    }
+
     /*Crear*/
     public function crearUsuario(){
         return view('crearUser');
@@ -19,10 +26,11 @@ class UsuarioController extends Controller
         $request->validate([
             'nombre_usu'=>'required|string|max:30',
             'apellido_usu'=>'required|string|max:30',
-            'email_usu'=>'required|string|max:10|min:150',
-            'tel_usu'=>'required|string|min:9|max:9',
+            'email_usu'=>'required|string|min:10|max:150',
+            'telf_usu'=>'required|string|min:9|max:9',
             'contra_usu'=>'required|string|min:4|max:50',
-            'foto_usu'=>'required|mimes:jpg,png,jpeg,webp,svg,gif'
+            'foto_usu'=>'required|mimes:jpg,png,jpeg,webp,svg,gif',
+            'id_rol_fk'=>'required|'
         ]);
         if($request->hasFile('foto_usu')){
             $datos['foto_usu'] = $request->file('foto_usu')->store('uploads','public');
@@ -32,13 +40,13 @@ class UsuarioController extends Controller
 
         try{
             DB::beginTransaction();
-            $id = DB::table('tbl_user')->insertGetId(["nombre_usu"=>$datos['nombre_usu'],"apellido_usu"=>$datos['apellido_usu'],"email_usu"=>$datos['email_usu'],"tel_usu"=>$datos['tel_usu'],"contra_usu"=>MD5($datos['contra_usu']),"foto_usu"=>$datos['foto_usu']]);
+            DB::table('tbl_user')->insertGetId(["nombre_usu"=>$datos['nombre_usu'],"apellido_usu"=>$datos['apellido_usu'],"email_usu"=>$datos['email_usu'],"telf_usu"=>$datos['telf_usu'],"contra_usu"=>MD5($datos['contra_usu']),"foto_usu"=>$datos['foto_usu'],"id_rol_fk"=>$datos['id_rol_fk']]);
             DB::commit();
         }catch(\Exception $e){
             DB::rollBack();
             return $e->getMessage();
         }
-        return redirect('mostrar');
+        return redirect('mostrarUser');
     }
 
     /*Actualizar*/
@@ -81,7 +89,7 @@ class UsuarioController extends Controller
             DB::rollBack();
             return $e->getMessage();
         }
-        return redirect('mostrar');
+        return redirect('mostrarUser');
     }
 
     /**

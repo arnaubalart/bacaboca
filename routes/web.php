@@ -15,7 +15,7 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-/*--------------Rutas de UsuarioController----------------*/
+/*------------------Usuarios------------------*/
 /*LogIn y LogOut*/
 Route::get('',[RestauranteController::class, 'login']);
 
@@ -40,16 +40,14 @@ Route::get('/modificarRestaurante/{id}', [RestauranteController::class, 'modific
 Route::put('/modificarRestaurante',[RestauranteController::class, 'modificarRestaurantePut']);
 
 
-/*--------------Rutas de UsuarioController----------------*/
+/*------------------Usuarios------------------*/
 /*Crear*/
 Route::get('/crearUser',[UsuarioController::class, 'crearUsuario']);
 
 Route::post('/crearUser',[UsuarioController::class, 'crearUsuarioPost']);
 
-/*Actualizar*/
-Route::get('/modificarUsuario/{id}', [UsuarioController::class, 'modificarUsuario']);
-
-Route::put('/modificarUsuario',[UsuarioController::class, 'modificarUsuarioPut']);
+/*Mostrar*/
+Route::get('mostrarUser',[UsuarioController::class, 'mostrarUsuario']);
 
 /*Eliminar*/
 Route::delete('/eliminarUsuario/{id}', [UsuarioController::class, 'eliminarUsuario']);
