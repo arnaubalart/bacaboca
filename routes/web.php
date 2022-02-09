@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestauranteController;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use App\Http\Controllers\RestauranteController;
 |
 */
 
+/*--------------Rutas de UsuarioController----------------*/
 /*LogIn y LogOut*/
 Route::get('',[RestauranteController::class, 'login']);
 
@@ -36,3 +38,18 @@ Route::delete('/eliminarRestaurante/{id}', [RestauranteController::class, 'elimi
 Route::get('/modificarRestaurante/{id}', [RestauranteController::class, 'modificarRestaurante']);
 
 Route::put('/modificarRestaurante',[RestauranteController::class, 'modificarRestaurantePut']);
+
+
+/*--------------Rutas de UsuarioController----------------*/
+/*Crear*/
+Route::get('/crearUser',[UsuarioController::class, 'crearUsuario']);
+
+Route::post('/crearUser',[UsuarioController::class, 'crearUsuarioPost']);
+
+/*Actualizar*/
+Route::get('/modificarUsuario/{id}', [UsuarioController::class, 'modificarUsuario']);
+
+Route::put('/modificarUsuario',[UsuarioController::class, 'modificarUsuarioPut']);
+
+/*Eliminar*/
+Route::delete('/eliminarUsuario/{id}', [UsuarioController::class, 'eliminarUsuario']);

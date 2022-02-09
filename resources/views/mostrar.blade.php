@@ -19,6 +19,9 @@
         <form action="{{url('crear')}}" method="GET">
             <button class="btn btn-primary" type="submit" name="Crear" value="Crear">Crear</button>
         </form>
+        <form action="{{url('crearUser')}}" method="GET">
+            <button class="btn btn-primary" type="submit" name="Crear" value="Crear">Crear Usuario</button>
+        </form>
         <form action="{{url('logout')}}" method="GET">
             <button id="logout" class="btn btn-dark" type="submit" name="logout" value="logout">Logout</button>
         </form>

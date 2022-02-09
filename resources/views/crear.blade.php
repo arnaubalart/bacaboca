@@ -23,14 +23,34 @@
         {{method_field('POST')}}
         <p>Nombre del restaurante</p>
             <input class="btn-outline-success" type="text" name="nom_resta" placeholder="Introduce el nombre del restaurante" value="{{old('nom_resta')}}">
+        @error('nom_resta')
+                <br>
+                {{$message}}
+            @enderror
         <p>Ciudad</p>
             <input class="btn-outline-success" type="text" name="ciudad_resta" placeholder="Introduce la ciudad donde se ubica el restaurante">
+            @error('ciudad_resta')
+                <br>
+                {{$message}}
+            @enderror
         <p>Dirección</p>
             <input class="btn-outline-success" type="text" name="direccion_resta" placeholder="Introduce la dirección del restaurante">
+            @error('direccion_resta')
+                <br>
+                {{$message}}
+            @enderror
         <p>Ubicación</p>
             <input class="btn-outline-success" type="text" name="ubi_resta" placeholder="Introduce la ubicación del restaurante">
+            @error('ubi_resta')
+                <br>
+                {{$message}}
+            @enderror
         <p>Telefono</p>
             <input class="btn-outline-success" type="number" name="telf_resta" placeholder="Introduce el numero de telefono del restaurante">
+            @error('telf_resta')
+                <br>
+                {{$message}}
+            @enderror
         <p>Precio</p>
             <select class="btn-outline-success" name="precio_resta" id="precio_resta">
                 <option value="" selected >Seleccione el precio del restaurante</option>
@@ -38,8 +58,16 @@
                 <option value="€">€€</option>
                 <option value="€">€€€</option>
             </select>
+            @error('precio_resta')
+                <br>
+                {{$message}}
+            @enderror
         <p>Foto</p>
             <input type="file" name="foto_resta">
+            @error('foto_resta')
+                <br>
+                {{$message}}
+            @enderror
         <p>Gerente</p>
             <select class="btn-outline-success" name="id_gerente_fk" id="id_gerente_fk">
                 <option>Seleccione un gerente</option>
@@ -47,6 +75,10 @@
                     <option value="{{$gerente->id_usu}}">{{$gerente->nombre_usu}}</option>
                 @endforeach
             </select>
+            @error('id_gerente_fk')
+                <br>
+                {{$message}}
+            @enderror
         <p>Tipo de restaurante</p>
             <select class="btn-outline-success" name="id_tipo_fk" id="id_tipo_fk">
                 <option>Seleccione el tipo de restaurante</option>
@@ -54,8 +86,16 @@
                     <option value="{{$type->id_tipo}}">{{$type->nom_tipo}}</option> 
                 @endforeach
             </select>
+            @error('id_tipo_fk')
+                <br>
+                {{$message}}
+            @enderror
         <p>Código postal del restaurante</p>
-        <input class="btn-outline-success" type="number" name="cp_resta" placeholder="Introduce el código postal del restaurante">
+            <input class="btn-outline-success" type="number" name="cp_resta" placeholder="Introduce el código postal del restaurante">
+            @error('cp_resta')
+                <br>
+                {{$message}}
+            @enderror
         <div>
             <input type="submit" value="Enviar">
         </div>

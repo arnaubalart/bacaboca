@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Restaurante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\RestauranteCrear;
 use Illuminate\Support\Facades\Storage;
 
 class RestauranteController extends Controller
