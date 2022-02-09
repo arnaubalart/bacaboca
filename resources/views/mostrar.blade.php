@@ -50,7 +50,7 @@
                         <td>{{$restaurante->ubi_resta}}</td>
                         <td>{{$restaurante->telf_resta}}</td>
                         <td>{{$restaurante->precio_resta}}</td>
-                        <td style="padding: auto; text-align: center"><img src="{{asset('storage')."/".$restaurante->foto_resta}}" width="100"></td>
+                        <td style="padding: auto; text-align: center"><img src="{{asset('storage/restaurantes')."/".$restaurante->foto_resta}}" width="100"></td>
                         <td>{{$restaurante->nombre_usu}}</td>
                         <td>{{$restaurante->nom_tipo}}</td>
                         <td>{{$restaurante->cp_resta}}</td>

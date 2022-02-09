@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('filtro');
+    return view('home');
 });
 
 
 Route::post('filtro',[RestauranteController::class, 'filtroController']);//FILTRO
 /*LogIn y LogOut*/
-Route::get('',[RestauranteController::class, 'login']);
+Route::get('login',[RestauranteController::class, 'login']);
 
 Route::post('login',[RestauranteController::class, 'loginPost']);
 
@@ -42,3 +42,7 @@ Route::delete('/eliminarRestaurante/{id}', [RestauranteController::class, 'elimi
 Route::get('/modificarRestaurante/{id}', [RestauranteController::class, 'modificarRestaurante']);
 
 Route::put('/modificarRestaurante',[RestauranteController::class, 'modificarRestaurantePut']);
+
+
+/*Ficha restaurante*/
+Route::get('/fichaRestaurante/{id}', [RestauranteController::class, 'fichaRestaurante']);

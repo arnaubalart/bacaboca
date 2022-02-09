@@ -72,7 +72,15 @@ function filter_data() { //FUNCION PRINCIPAL
             var recarga = '';
             /* Leerá la respuesta que es devuelta por el controlador: */
             for (let i = 0; i < respuesta.length; i++) {
-                recarga += '<div class="restaurante">' + respuesta[i].nom_resta + '</div>';
+                recarga += `<div class="item-restaurant">
+                                <img src="storage/restaurantes/` + respuesta[i].foto_resta + `" alt="foto-[introducir nombre restaurante]" class="foto-restaurante">
+                                <div class="info-restaurante">
+                                    <h4>` + respuesta[i].nom_resta + `</h4>
+                                    <h6>` + respuesta[i].nom_tipo + `</h6>
+                                    <h6>` + respuesta[i].ciudad_resta + `</h6>
+                                    <small>4.5</small>
+                                </div>
+                            </div>`;
             }
             contenedor.innerHTML = recarga;
         }

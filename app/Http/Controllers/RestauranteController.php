@@ -29,7 +29,7 @@ class RestauranteController extends Controller
             return redirect('/mostrar');
         }else{
             //No establecemos session y lo enviamos a login
-            return redirect('');
+            return redirect('login');
         }
         return $user;
     }
@@ -142,5 +142,13 @@ class RestauranteController extends Controller
         $datos=DB::select($query);
         return response()->json($datos);
     
+    }
+
+    /*Ficha restaurante*/
+    public function fichaRestaurante($id){
+        $restaurante=DB::table('tbl_resta')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')->join('tbl_tipo','tbl_resta.id_tipo_fk','=','tbl_tipo.id_tipo')->select()->where('id_resta','=',$id)->first();
+        $user=DB::select('select u.id_usu, u.nombre_usu from tbl_user u inner join tbl_rol r on u.id_rol_fk=r.id_rol where u.id_rol_fk=3;');
+        $tipo=DB::select('select id_tipo, nom_tipo from tbl_tipo;');
+        return view('ficharestaurante', compact('restaurante','user','tipo'));
     }
 }
