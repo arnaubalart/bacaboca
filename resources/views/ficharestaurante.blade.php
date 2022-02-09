@@ -63,7 +63,7 @@
         <div class="bg-header">
             <div class="bg-svg all-width">
                 <!-- poner la imagen y el alt -->
-                <img src="{{asset('storage/restaurantes/elpollo.png')}}" alt="lospolloshermanos">
+                <img src="{{asset('storage/restaurantes')."/".$restaurante->foto_resta}}" alt="lospolloshermanos">
             </div>
         </div>
     </header>
