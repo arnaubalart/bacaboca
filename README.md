@@ -13,44 +13,36 @@ En primer lugar deberemos descargarnos todos los archivos del proyecto. Para ell
 - Descargándonos los ficheros como .zip
     - En la página principal del repositorio, dentro del desplegable abierto pulsando en el botón verde "code", apretar en "Download ZIP".
 
-#### IMPORTANTE crear el archivo config.php dentro de services y que contenga (con los datos de vuestro host de base de datos):
-
-```
- define("SERVIDOR","localhost");
- define("USUARIO","root");
- define("PASSWORD","");
- define("BD","bd_restaurant");
-```
+#### IMPORTANTE crear el archivo .env (copiando el .envexample y personalizándolo) y que contenga datos de vuestro host de base de datos
+Es posible que haya que escribir los siguientes comandos en la consola:
+- ``` composer install ```
+- ``` php artisan key:generate ```
+- ``` php artisan storage:link ```
 
 #### Para acceder:
-###### Hay dos tipos de usuarios:
-- David, Ivan (inicial en mayúsculas) --> Camareros
-- Danny (inicial en mayúsculas) --> Mantenimiento
-- Jaime (Inicial en mayúsculas) --> Administrador
-###### Contraseñas:
-- David: qweQWE123
-- Ivan: zxcZXC123
-- Danny: admin123
-- Jaime: 1234
+###### Hay tres tipos de usuarios:
+- Admins --> ejemplo: arnau@bacaboca.com
+- Clientes --> ejemplo: agnes@gmail.com
+- Gerentes
+###### Contraseña (para todos los usuarios):
+- 1234
 ## Despliegue 📦
-La página está subida al hosting InfinityFree.
-Para desplegar el sitio web, se ha creado una nueva base de datos con el fichero sql del proyecto, pero linkeada con el hosting.
-Para poder conectar el programa con la base de datos, se ha modificado el fichero config.php con las nuevas credenciales.
-Después he subido todos los ficheros al gestor de documentos, y ya se puede ver el proyecto subido a la red.
+La página no está subida a ningún hosting.
 
-La url es la siguiente:
-www.conde-docku.42web.io
+
 ## Construido con 🛠️
 - Front-End:
     -  HTML
     - CSS
     - JavaScript
 - Back-End:
-    - PHP
+    - PHP 
+    - Laravel
+    - AJAX
 - Base de Datos
     - SQL
 - Con la ayuda de Git y GitHub
 ## Versionado 📌
 La versión actual es la 2.0.20. ya que es la versión estable número 1 (1.0.0), no se ha añadido ninguna funcionalidad extra (1.0.0) y se han realizado 20 bugfixes (1.1.20.)
 ## Autores ✒️
-Trabajo realizado por: David Ortega, Ivan Aguinaga, Arnau Balart
+Trabajo realizado por: Marc Diaz, Isaac Ortiz, Arnau Balart
