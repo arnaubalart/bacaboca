@@ -1,5 +1,20 @@
 $(document).ready(function() {
+    $(".btn-cerrarPop").click(function() {
+        $(".overlay-p").removeClass('active');
+        $("#popup").removeClass('active');
+        $(".contenedor-popup .ejercicio-body").html('')
+    });
+    $(".btn-abrirPop").click(function() {
+        $(".overlay-p").addClass('active');
+        $("#popup").addClass('active');
+    });
+});
+
+$(document).ready(function() {
     //inicializar el owl carousel (libreria para hacer carousel con jquery)
+
+
+
     $(".owl-carousel").owlCarousel();
 
     //pulsar la burger
@@ -30,4 +45,21 @@ $(document).ready(function() {
         $("form .hidden-texto").val($(this).val())
         $(".input-search-top").val($(this).val())
     });
+
+
+
+
+
+
+    var map = L.map('map').setView([41.405143642716084, 2.149759037596462], 13);
+
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+        attribution: 'El isi',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'your.mapbox.access.token'
+    }).addTo(map);
+
 });

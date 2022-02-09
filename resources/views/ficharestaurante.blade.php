@@ -1,13 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Ficha restaurante</title>
+    <!-- librerias-->
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <!-- jquery-->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.0/src/js.cookie.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <script src="../js/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <!-- sweetalert-->
+    <script type="text/javascript" src="../js/iconos_g.js"></script>
+    <!-- iconos FontAwesome-->
+    <script type="text/javascript" src="../js/js.js"></script>
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
-    <p>POIA</p>
-    {{$restaurante->ubi_resta}}
+    <nav class="sidenav">
+        <ul>
+            <li></li>
+        </ul>
+    </nav>
+    <menu class="menu">
+        <div class="container-menu">
+            <div class="burger flex-cv">
+                <button class="boton-burger" onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))" aria-label="Main Menu">
+                    <svg width="50" height="50" viewBox="0 0 100 100">
+                      <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+                      <path class="line line2" d="M 20,50 H 80" />
+                      <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+                    </svg>
+                  </button>
+            </div>
+            <div class="logo flex-cv">
+                <img src="{{asset('storage/logo/baca.gif')}}" alt="LogoBacaBoca">
+            </div>
+            <div class="toggle">
+
+            </div>
+            <div class="container-search-top">
+                <div class="search-top">
+                    <svg width="24px" height="24px" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M17.5834 5.16602C14.5001 2.08268 9.50008 2.08268 6.41675 5.16602C3.33341 8.24935 3.33341 13.3327 6.41675 16.416L12.0001 21.9993L17.5834 16.3327C20.6667 13.3327 20.6667 8.24935 17.5834 5.16602ZM12.0001 12.416C11.0834 12.416 10.3334 11.666 10.3334 10.7493C10.3334 9.83268 11.0834 9.08268 12.0001 9.08268C12.9167 9.08268 13.6667 9.83268 13.6667 10.7493C13.6667 11.666 12.9167 12.416 12.0001 12.416Z" fill="#000000"></path></svg>
+                    <input class="input-search-top" type="text" placeholder="Introduce que restaurante quieres">
+                </div>
+            </div>
+            <div class="login flex-cv">
+                <button class="btn-abrirPop" type="button">Login</button>
+            </div>
+        </div>
+    </menu>
+    <header class="header-tipo">
+        <div class="bg-header">
+            <div class="bg-svg all-width">
+                <!-- poner la imagen y el alt -->
+                <img src="{{asset('storage/restaurantes/elpollo.png')}}" alt="lospolloshermanos">
+            </div>
+        </div>
+    </header>
+    <div class="content region-tipo">
+        <div class="info-resta">
+            <div class="container-info "></div>
+            <div class="nombre-resta">
+                <!-- Poner el nombre resta -->
+                <h2>Los Pollos Hermanos</h2>
+            </div>
+
+            <div class="more-info-resta">
+                <!-- Poner nota resta -->
+                <div class="nota">
+                    <p>9.3</p>
+                </div>
+                <!-- Poner tipo resta -->
+                <div class="tipo-resta">
+                    <p>Comida mejicana</p>
+                </div>
+                <!-- Poner precio resta -->
+                <div class="precio">
+                    <p>€€€</p>
+                </div>
+            </div>
+            <div class="descripcion">
+                <h3>Descripción</h3>
+                <!-- poner descripcion del restaurante en cuestion -->
+                <p>Restaurante de comida mejicana y de pollo. Gustavo frinn es el dueño, etc etc. Lorem ipsum</p>
+            </div>
+        </div>
+        <div class="ubicacion">
+            <!-- Passar con una cookie las cordenadas del mapa. La cookie se llamara ubiMap-->
+            <span class="hide">ubicacion</span>
+            <div class="container-mapa">
+                <div class="mapa" id="map">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="region-2">
+        <div class="container-reviews">
+            <!--Recordar de passar las fk del id del usuario y la fk del id restaurante-->
+            <form class="formulario-review" action="">
+                <h2>Escriba aqui su valoración</h2>
+                <label class="rating-label">
+                <strong>Nota</strong>
+                <input
+                  class="rating"
+                  max="5"
+                  min="0"
+                  oninput="this.style.setProperty('--value', this.value)"
+                  step="0.5"
+                  type="range"
+                  value="1">
+              </label>
+                <label for="textarea"> Descripcion</label>
+                <textarea name="textarea" id="" cols="30" rows="10" resize="false"></textarea>
+                <input type="submit" value="enviar">
+            </form>
+
+            <div class="card-review">
+                <div class="nota-resta"></div>
+                <div class="foto-user"></div>
+                <div class="nombre-user"></div>
+                <div class="descripcion-review"></div>
+            </div>
+        </div>
+    </div>
+    <footer class=""></footer>
+
+    <div class="overlay"></div>
+    <div class="overlay-p">
+        <div class="popup" id="popup">
+            <a href="#" id="btn-cerrar-popup" class="btn-cerrarPop"><i class="fas fa-times"></i></a>
+            <h3>Iniciar sessión <span class="numeroEj"></span></h3>
+            <div class="contenedor-popup">
+                <div class="ejercicio-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>

@@ -3,7 +3,7 @@
 ///////////////////
 @font-face {
     font-family: 'Uber-Move-Text';
-    src: url('font/UberMoveText-Regular.woff2') format('woff2'), url('font/UberMoveText-Regular.woff') format('woff'), url('font/UberMoveText-Regular.ttf') format('truetype'), url('font/UberMoveText-Regular.svg#UberMoveText-Regular') format('svg');
+    src: url('../font/UberMoveText-Regular.woff2') format('woff2'), url('../font/UberMoveText-Regular.woff') format('woff'), url('../font/UberMoveText-Regular.ttf') format('truetype'), url('../font/UberMoveText-Regular.svg#UberMoveText-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
     font-family: 'Uber-Move-Text';
-    src: url('font/UberMoveText-Light.woff2') format('woff2'), url('font/UberMoveText-Light.woff') format('woff'), url('font/UberMoveText-Light.ttf') format('truetype'), url('font/UberMoveText-Light.svg#UberMoveText-Light') format('svg');
+    src: url('../font/UberMoveText-Light.woff2') format('woff2'), url('../font/UberMoveText-Light.woff') format('woff'), url('../font/UberMoveText-Light.ttf') format('truetype'), url('../font/UberMoveText-Light.svg#UberMoveText-Light') format('svg');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
     font-family: 'Uber-Move-Text';
-    src: url('font/UberMoveText-Bold.woff2') format('woff2'), url('font/UberMoveText-Bold.woff') format('woff'), url('font/UberMoveText-Bold.ttf') format('truetype'), url('font/UberMoveText-Bold.svg#UberMoveText-Bold') format('svg');
+    src: url('../font/UberMoveText-Bold.woff2') format('woff2'), url('../font/UberMoveText-Bold.woff') format('woff'), url('../font/UberMoveText-Bold.ttf') format('truetype'), url('../font/UberMoveText-Bold.svg#UberMoveText-Bold') format('svg');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
     font-family: 'Uber-Move-Text';
-    src: url('font/UberMoveText-Medium.woff2') format('woff2'), url('font/UberMoveText-Medium.woff') format('woff'), url('font/UberMoveText-Medium.ttf') format('truetype'), url('font/UberMoveText-Medium.svg#UberMoveText-Medium') format('svg');
+    src: url('../font/UberMoveText-Medium.woff2') format('woff2'), url('../font/UberMoveText-Medium.woff') format('woff'), url('../font/UberMoveText-Medium.ttf') format('truetype'), url('../font/UberMoveText-Medium.svg#UberMoveText-Medium') format('svg');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -98,6 +98,16 @@ $mobil: 600px;
     --fuente1: 'Uber-Move-Text', sans-serif; //light 300, regular 400, medium 500, semi-bold 600, bold 700
     --size-standar: calc(12px + 0.2vw);
     --size-medium: calc(15px + 0.2vw);
+    ///////STARS
+    --star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.25l-6.188 3.75 1.641-7.031-5.438-4.734 7.172-0.609 2.813-6.609 2.813 6.609 7.172 0.609-5.438 4.734 1.641 7.031z"/></svg>');
+    --fill: gold;
+    --fillbg: rgba(100, 100, 100, 0.15);
+    --dir: right;
+    --stars: 5;
+    --starsize: 3rem;
+    --symbol: var(--star);
+    --value: 1;
+    --x: calc(100% * (var(--value) / var(--stars)));
 }
 
 
@@ -193,13 +203,16 @@ body {
 menu {
     height: 9.3333vh;
     background: var(--white);
-    max-width: 1920px;
     margin: 0 auto;
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 5;
+    width: 100%;
     .container-menu {
         display: flex;
+        max-width: 1920px;
+        justify-content: center;
+        margin: auto;
         .burger {
             .boton-burger {
                 background-color: transparent;
@@ -251,23 +264,25 @@ menu {
             }
         }
         .toggle {}
-        .search-top {
-            padding: 1px 15px;
-            margin: 20px 15px;
-            background: var(--grey);
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            width: 40vw;
-            svg {
-                margin-right: 5px;
-            }
-            input {
-                background: transparent;
-                width: 100%;
-                &:focus-visible {
-                    border: none;
-                    outline: none;
+        .container-search-top {
+            .search-top {
+                padding: 1px 15px;
+                margin: 20px 15px;
+                background: var(--grey);
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 40vw;
+                svg {
+                    margin-right: 5px;
+                }
+                input {
+                    background: transparent;
+                    width: 100%;
+                    &:focus-visible {
+                        border: none;
+                        outline: none;
+                    }
                 }
             }
         }
@@ -304,7 +319,9 @@ header {
     align-items: center;
     height: calc(100vh);
     max-width: 1920px;
-    margin-top: 9.3333vh;
+    //margin: 9.3333vh auto auto auto;
+    margin: auto;
+    position: relative;
     .search-header {
         padding: 1px 15px;
         margin: 20px 15px;
@@ -325,17 +342,47 @@ header {
             }
         }
     }
-    .bg-svg {
-        width: 33.33%;
-        height: 100%;
+    .bg-header {
         position: absolute;
         top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         z-index: -10;
-        &.left {
-            left: 0;
+        background: #fff2d9;
+        .bg-svg {
+            //width: 33.33%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            z-index: -10;
+            img {
+                height: 100%;
+                width: auto;
+                object-fit: cover;
+            }
+            &.left {
+                left: 0;
+            }
+            &.right {
+                right: 0;
+            }
         }
-        &.right {
-            right: 0;
+    }
+    &.header-tipo {
+        height: calc(20vh);
+        .bg-header {
+            @extend .bg-header;
+            width: 100%;
+            .bg-svg {
+                width: 100%;
+                &.all-width {
+                    width: 100%;
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
 }
@@ -358,6 +405,7 @@ header {
             position: relative;
             cursor: pointer;
             font-size: var(--size-medium);
+            background-image: url(../../public/storage/web/comidas/china.png);
             background-repeat: no-repeat;
             background-size: contain;
             background-position-x: right;
@@ -439,4 +487,254 @@ header {
 //FOOTER //
 footer {
     background: var(--black);
+}
+
+///////////////////////////////////////////
+///PAGINA TIPO FICHA RESTAURANTE
+/////////////////////////////////////////
+.content.region-tipo {
+    display: flex;
+    flex-flow: row wrap;
+    .info-resta {
+        width: 30%;
+        .container-info {
+            padding: 15px 25px;
+            .nombre-resta {
+                h2 {}
+            }
+            .more-info-resta {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                .nota {
+                    p {}
+                }
+                .tipo-resta {
+                    p {}
+                }
+                .precio {
+                    p {}
+                }
+            }
+            .descripcion {
+                h3 {}
+                p {}
+            }
+        }
+    }
+    .ubicacion {
+        width: 70%;
+        .container-mapa {
+            height: 70vh;
+            padding: 15px 25px;
+            #map {
+                height: 100%;
+            }
+        }
+    }
+}
+
+.region-2 {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    .container-reviews {
+        border: 2px var(--first-color) solid;
+        margin: 15px 25px;
+        width: 70%;
+        form {
+            @extend .flex-cv;
+            flex-flow: column nowrap;
+            [dir="rtl"] .rating {
+                --dir: left;
+            }
+            .rating-label,
+            .rating {
+                display: block;
+                font-family: ui-sans-serif, system-ui, sans-serif;
+            }
+            .rating-label {
+                margin-block-end: 1rem;
+            }
+            .rating {
+                --dir: right;
+                --fill: gold;
+                --fillbg: rgba(100, 100, 100, 0.15);
+                --heart: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.328l-1.453-1.313q-2.484-2.25-3.609-3.328t-2.508-2.672-1.898-2.883-0.516-2.648q0-2.297 1.57-3.891t3.914-1.594q2.719 0 4.5 2.109 1.781-2.109 4.5-2.109 2.344 0 3.914 1.594t1.57 3.891q0 1.828-1.219 3.797t-2.648 3.422-4.664 4.359z"/></svg>');
+                --star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.25l-6.188 3.75 1.641-7.031-5.438-4.734 7.172-0.609 2.813-6.609 2.813 6.609 7.172 0.609-5.438 4.734 1.641 7.031z"/></svg>');
+                --stars: 5;
+                --starsize: 3rem;
+                --symbol: var(--star);
+                --value: 1;
+                --w: calc(var(--stars) * var(--starsize));
+                --x: calc(100% * (var(--value) / var(--stars)));
+                block-size: var(--starsize);
+                inline-size: var(--w);
+                position: relative;
+                touch-action: manipulation;
+                -webkit-appearance: none;
+                &::-moz-range-track {
+                    background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+                    block-size: 100%;
+                    mask: repeat left center/var(--starsize) var(--symbol);
+                }
+                &::-webkit-slider-runnable-track {
+                    background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+                    block-size: 100%;
+                    mask: repeat left center/var(--starsize) var(--symbol);
+                    -webkit-mask: repeat left center/var(--starsize) var(--symbol);
+                }
+                &::-moz-range-thumb {
+                    height: var(--starsize);
+                    opacity: 0;
+                    width: var(--starsize);
+                }
+                &::-webkit-slider-thumb {
+                    height: var(--starsize);
+                    opacity: 0;
+                    width: var(--starsize);
+                    -webkit-appearance: none;
+                }
+            }
+            textarea {
+                width: 70%;
+                max-width: 70%;
+                max-height: 250px;
+                border: var(--grey) 1px solid;
+            }
+        }
+    }
+}
+
+/////////////////////////
+//popup
+////////////////////////////////7
+.overlay-p {
+    background: rgba(0, 0, 0, .3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    visibility: hidden;
+    z-index: 10;
+    &.active {
+        visibility: visible;
+        overflow: hidden;
+    }
+}
+
+.popup {
+    background: #F8F8F8;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    padding: 20px;
+    text-align: center;
+    width: 600px;
+    max-height: 80vh;
+    min-height: 35vh;
+    overflow-y: auto;
+    transition: .3s ease all;
+    transform: scale(0.7);
+    opacity: 0;
+    z-index: 30;
+    .btn-cerrarPop {
+        font-size: 16px;
+        line-height: 16px;
+        display: block;
+        text-align: right;
+        transition: .3s ease all;
+        color: #BBBBBB;
+        &:hover {
+            color: #000;
+        }
+    }
+    h3 {
+        font-size: 36px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        opacity: 0;
+        span {
+            //numero del ejercicio
+            font-weight: inherit;
+        }
+    }
+    h4 {
+        font-size: 26px;
+        font-weight: 300;
+        margin-bottom: 40px;
+        opacity: 0;
+    }
+    .contenedor-popup {
+        opacity: 0;
+        margin-top: 50px;
+    }
+    button,
+    input[type="button"] {
+        margin-top: 10px;
+        padding: 10px 15px;
+        background: var(--first-color);
+        color: var(--first-color);
+    }
+    &.active {
+        transform: scale(1);
+        opacity: 1;
+        h3 {
+            animation: entradaTitulo .8s ease .5s forwards;
+        }
+        h4 {
+            animation: entradaSubtitulo .8s ease .5s forwards;
+        }
+        .contenedor-popup {
+            animation: entrada3 1s linear 1s forwards;
+        }
+    }
+}
+
+@keyframes animate {
+    //animacion fondo
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        // border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        // border-radius: 50%;
+    }
+}
+
+@keyframes entradaTitulo {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes entradaSubtitulo {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes entrada3 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
