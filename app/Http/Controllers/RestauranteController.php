@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\RestauranteCrear;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 
 
@@ -22,6 +24,8 @@ class RestauranteController extends Controller
         $user = DB::table("tbl_user")->where('email_usu','=',$datos['email_usu'])->where('contra_usu','=',MD5($datos['contra_usu']))->count();
         if($user == 1){
             //Establecemos session y lo enviamos a la pag que toca
+            $id_usu=DB::select('select id_usu, email_usu from tbl_user where email_usu="'.$datos['email_usu'].'";');
+            Session::put('id_usu',$id_usu[0]->id_usu);
             $rol = DB::table("tbl_user")->select('id_rol_fk')->where('email_usu','=',$datos['email_usu'])->where('contra_usu','=',MD5($datos['contra_usu']))->first();
             if($rol->id_rol_fk == 1){
                 $request->session()->put('nombre_admin',$request->email_usu);
@@ -147,8 +151,25 @@ class RestauranteController extends Controller
     /*Ficha restaurante*/
     public function fichaRestaurante($id){
         $restaurante=DB::table('tbl_resta')->join('tbl_user','tbl_resta.id_gerente_fk','=','tbl_user.id_usu')->join('tbl_tipo','tbl_resta.id_tipo_fk','=','tbl_tipo.id_tipo')->select()->where('id_resta','=',$id)->first();
-        $user=DB::select('select u.id_usu, u.nombre_usu from tbl_user u inner join tbl_rol r on u.id_rol_fk=r.id_rol where u.id_rol_fk=3;');
-        $tipo=DB::select('select id_tipo, nom_tipo from tbl_tipo;');
-        return view('ficharestaurante', compact('restaurante','user','tipo'));
+        $reviews=DB::select('select r.id_rev, r.valoracion_rev, r.texto_rev, r.id_usu_fk, r.id_resta_fk, re.id_resta, u.id_usu, u.nombre_usu, u.apellido_usu from tbl_review r inner join tbl_resta re on r.id_resta_fk=re.id_resta inner join tbl_user u on r.id_usu_fk=id_usu where re.id_resta='.$id.';');
+        return view('ficharestaurante', compact('restaurante','reviews'));
+    }
+
+    /*Crear review*/
+    public function creaReview(Request $request){
+        $datos = $request->except('_token');
+        // $request->validate([
+        //     'nota_resta'=>'required|'
+        // ]);
+        try{
+            DB::beginTransaction();
+            DB::table('tbl_review')->insertGetId(["id_usu_fk"=>$datos['id_usu'],"id_resta_fk"=>$datos['id_resta'],"valoracion_rev"=>$datos['nota_resta'],"texto_rev"=>$datos['texto_rev']]);
+            DB::commit();
+            //$reviews=DB::select('select r.id_rev, r.valoracion_rev, r.texto_rev, r.id_usu_fk, r.id_resta_fk, re.id_resta, u.id_usu, u.nombre_usu, u.apellido_usu from tbl_review r inner join tbl_resta re on r.id_resta_fk=re.id_resta inner join tbl_user u on r.id_usu_fk=id_usu where re.id_resta='.$datos['id_resta'].';');
+        }catch(\Exception $e){
+            DB::rollBack();
+            return $e->getMessage();
+        }
+        return Redirect::to('fichaRestaurante/'.$datos['id_resta']);
     }
 }

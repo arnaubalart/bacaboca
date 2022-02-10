@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../css/owl.carousel.css">
     <link rel="stylesheet" href="../css/owl.theme.default.min.css">
     <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/fichaResta.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <!-- sweetalert-->
@@ -23,6 +24,7 @@
     <script type="text/javascript" src="../js/js.js"></script>
     <link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="../css/styles.css">
+    <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -72,7 +74,7 @@
             <div class="container-info "></div>
             <div class="nombre-resta">
                 <!-- Poner el nombre resta -->
-                <h2>Los Pollos Hermanos</h2>
+                <h2>{{ucwords($restaurante->nom_resta)}}</h2>
             </div>
 
             <div class="more-info-resta">
@@ -82,22 +84,22 @@
                 </div>
                 <!-- Poner tipo resta -->
                 <div class="tipo-resta">
-                    <p>Comida mejicana</p>
+                    <p>Menú:  {{$restaurante->nom_tipo}}</p>
                 </div>
                 <!-- Poner precio resta -->
                 <div class="precio">
-                    <p>€€€</p>
+                    <p>{{$restaurante->precio_resta}}</p>
                 </div>
             </div>
             <div class="descripcion">
-                <h3>Descripción</h3>
+                <h3>Dirección</h3>
                 <!-- poner descripcion del restaurante en cuestion -->
-                <p>Restaurante de comida mejicana y de pollo. Gustavo frinn es el dueño, etc etc. Lorem ipsum</p>
+                <p>{{$restaurante->direccion_resta}}</p>
             </div>
         </div>
         <div class="ubicacion">
             <!-- Passar con una cookie las cordenadas del mapa. La cookie se llamara ubiMap-->
-            <span class="hide">ubicacion</span>
+            <span class="hide">{{$restaurante->ubi_resta}}</span>
             <div class="container-mapa">
                 <div class="mapa" id="map">
 
@@ -112,30 +114,49 @@
     <div class="region-2">
         <div class="container-reviews">
             <!--Recordar de passar las fk del id del usuario y la fk del id restaurante-->
-            <form class="formulario-review" action="">
+            <form class="formulario-review" action="{{url('/creaReview')}}" method="POST">
+                @csrf
+                {{method_field('POST')}}
                 <h2>Escriba aqui su valoración</h2>
                 <label class="rating-label">
-                <strong>Nota</strong>
-                <input
-                  class="rating"
-                  max="5"
-                  min="0"
-                  oninput="this.style.setProperty('--value', this.value)"
-                  step="0.5"
-                  type="range"
-                  value="1">
-              </label>
+                    <strong>Nota</strong>
+                    <input
+                    class="rating"
+                    max="5"
+                    min="0"
+                    oninput="this.style.setProperty('--value', this.value)"
+                    step="0.5"
+                    type="range"
+                    value="1"
+                    name="nota_resta"
+                    id="nota_resta"
+                    >
+                </label>
                 <label for="textarea"> Descripcion</label>
-                <textarea name="textarea" id="" cols="30" rows="10" resize="false"></textarea>
-                <input type="submit" value="enviar">
+                <textarea name="texto_rev" id="texto_rev" cols="30" rows="10" resize="false"></textarea>
+                <input type="hidden" name="id_resta" id="id_resta" value="{{$restaurante->id_resta}}">
+                <input type="hidden" name="id_usu" id="id_usu" value="{{Session::get('id_usu')}}">
+                @if (Session::get('nombre_admin') || Session::get('nombre_cliente'))
+                    <input type="submit" value="Enviar">
+                @else
+                    <input type="submit" value="Enviar" disabled><br>
+                    <p class="no-login">Inicia sesión para poder valorar el restaurante</p>
+                @endif
+
             </form>
 
-            <div class="card-review">
-                <div class="nota-resta"></div>
-                <div class="foto-user"></div>
-                <div class="nombre-user"></div>
-                <div class="descripcion-review"></div>
+            <div class="historial-reviews" id="historial-reviews"><!-- MOSTRAR REVIEWS -->
+                @foreach ($reviews as $review)
+                <div class="card-review">
+                    <div class="nota-resta">{{$review->valoracion_rev}}</div>
+                    <div class="foto-user"><img src="" alt="foto usuario"></div>
+                    <div class="nombre-user">{{$review->nombre_usu}}</div>
+                    <div class="descripcion-review">{{$review->texto_rev}}</div>
+                </div>
+                @endforeach
             </div>
+
+
         </div>
     </div>
     <footer class=""></footer>

@@ -51,6 +51,21 @@ $(document).ready(function() {
 
 
 
+    /*     var map = L.map('map').setView([41.405143642716084, 2.149759037596462], 13);
+
+        L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+            attribution: 'El isi',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'your.mapbox.access.token'
+        }).addTo(map); */
+
+});
+
+$(".region-tipo .ubicacion").ready(function() {
+
     var map = L.map('map').setView([41.405143642716084, 2.149759037596462], 13);
 
     L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
@@ -61,5 +76,4 @@ $(document).ready(function() {
         zoomOffset: -1,
         accessToken: 'your.mapbox.access.token'
     }).addTo(map);
-
 });

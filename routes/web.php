@@ -46,3 +46,6 @@ Route::put('/modificarRestaurante',[RestauranteController::class, 'modificarRest
 
 /*Ficha restaurante*/
 Route::get('/fichaRestaurante/{id}', [RestauranteController::class, 'fichaRestaurante']);
+
+/*Crear review*/
+Route::post('/creaReview', [RestauranteController::class, 'creaReview']);

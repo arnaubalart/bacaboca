@@ -36,6 +36,10 @@
 
 .flex-cv,
 .container-list-restaurantes .grid-restaurantes .item-restaurant .info-restaurante small,
+.content.region-tipo,
+.content.region-tipo .info-resta .container-info,
+.region-2,
+.region-2 .container-reviews,
 .region-2 .container-reviews form {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -82,7 +86,7 @@
     box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
 }
 
-:root {
+ :root {
     --first-color: #19c673;
     --second-color: #05a357;
     --third-color: #f6f0ea;
@@ -111,18 +115,18 @@
 
 
 /*  MIXINS
-========================================== */
+  ========================================== */
 
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 20px;
 }
 
-::-webkit-scrollbar-thumb {
+ ::-webkit-scrollbar-thumb {
     background: var(--first-color);
     border-radius: 1px;
 }
 
-::-webkit-scrollbar-track {
+ ::-webkit-scrollbar-track {
     background-color: var(--third-color);
 }
 
@@ -429,7 +433,7 @@ header.header-tipo .bg-header .bg-svg.all-width img {
     position: relative;
     cursor: pointer;
     font-size: var(--size-medium);
-    background-image: url(../../public/storage/web/comidas/china.png);
+    background-image: url(../../public/storage/comidas/china.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position-x: right;
@@ -522,10 +526,23 @@ footer {
 
 .content.region-tipo .info-resta {
     width: 30%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: center;
+    align-content: center;
 }
 
 .content.region-tipo .info-resta .container-info {
     padding: 15px 25px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column;
+    flex-flow: column;
+}
+
+.content.region-tipo .info-resta .container-info .nombre-resta h2 {
+    font-weight: bold;
 }
 
 .content.region-tipo .info-resta .container-info .more-info-resta {
@@ -541,12 +558,25 @@ footer {
     justify-content: space-between;
 }
 
+.content.region-tipo .info-resta .container-info .descripcion {
+    margin-top: 10px;
+}
+
+.content.region-tipo .info-resta .container-info .descripcion h3 {
+    font-size: 25px;
+}
+
+.content.region-tipo .info-resta .container-info .descripcion p {
+    padding-top: 15px;
+}
+
 .content.region-tipo .ubicacion {
-    width: 70%;
+    width: 50%;
+    z-index: 1;
 }
 
 .content.region-tipo .ubicacion .container-mapa {
-    height: 70vh;
+    height: 66vh;
     padding: 15px 25px;
 }
 
@@ -556,18 +586,29 @@ footer {
 
 .region-2 {
     width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
 }
 
 .region-2 .container-reviews {
+    padding: 30px 0px;
     border: 2px var(--first-color) solid;
     margin: 15px 25px;
     width: 70%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    position: relative;
+}
+
+.region-2 .container-reviews .bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background-image: url(../../public/storage/banners/japoleft.svg);
+    background-repeat: no-repeat;
 }
 
 .region-2 .container-reviews form {
@@ -575,24 +616,41 @@ footer {
     -webkit-box-direction: normal;
     -ms-flex-flow: column nowrap;
     flex-flow: column nowrap;
+    background: var(--white);
+    max-width: 700px;
+    width: 100%;
 }
 
-.region-2 .container-reviews form [dir="rtl"] .rating {
+.region-2 .container-reviews form textarea {
+    width: 70%;
+    max-width: 70%;
+    height: 250px;
+    max-height: 250px;
+    border: var(--grey) 1px solid;
+}
+
+.region-2 .container-reviews form input[type="submit"] {
+    margin: 15px;
+    background: var(--first-color);
+    padding: 10px;
+}
+
+.region-2 .container-reviews [dir="rtl"] .rating {
     --dir: left;
 }
 
-.region-2 .container-reviews form .rating-label,
-.region-2 .container-reviews form .rating {
+.region-2 .container-reviews .rating-label,
+.region-2 .container-reviews .rating {
     display: block;
     font-family: ui-sans-serif, system-ui, sans-serif;
 }
 
-.region-2 .container-reviews form .rating-label {
+.region-2 .container-reviews .rating-label {
     -webkit-margin-after: 1rem;
     margin-block-end: 1rem;
 }
 
-.region-2 .container-reviews form .rating {
+.region-2 .container-reviews .rating {
     --dir: right;
     --fill: gold;
     --fillbg: rgba(100, 100, 100, 0.15);
@@ -612,13 +670,13 @@ footer {
     -webkit-appearance: none;
 }
 
-.region-2 .container-reviews form .rating::-moz-range-track {
+.region-2 .container-reviews .rating::-moz-range-track {
     background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
     block-size: 100%;
     mask: repeat left center/var(--starsize) var(--symbol);
 }
 
-.region-2 .container-reviews form .rating::-webkit-slider-runnable-track {
+.region-2 .container-reviews .rating::-webkit-slider-runnable-track {
     background: -webkit-gradient(linear, , color-stop(0, var(--fill)), color-stop(0, var(--fillbg)));
     background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
     block-size: 100%;
@@ -626,24 +684,58 @@ footer {
     -webkit-mask: repeat left center/var(--starsize) var(--symbol);
 }
 
-.region-2 .container-reviews form .rating::-moz-range-thumb {
+.region-2 .container-reviews .rating::-moz-range-thumb {
     height: var(--starsize);
     opacity: 0;
     width: var(--starsize);
 }
 
-.region-2 .container-reviews form .rating::-webkit-slider-thumb {
+.region-2 .container-reviews .rating::-webkit-slider-thumb {
     height: var(--starsize);
     opacity: 0;
     width: var(--starsize);
     -webkit-appearance: none;
 }
 
-.region-2 .container-reviews form textarea {
-    width: 70%;
-    max-width: 70%;
-    max-height: 250px;
+.region-2 .container-reviews .card-review {
+    background: var(--white);
+    margin: 15px;
+    max-width: 800px;
     border: var(--grey) 1px solid;
+    padding: 10px;
+}
+
+.region-2 .container-reviews .card-review .user-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.region-2 .container-reviews .card-review .user-info .foto-user {
+    padding: 10px;
+}
+
+.region-2 .container-reviews .card-review .user-info .foto-user i {
+    font-size: calc(30px + 1vw);
+}
+
+.region-2 .container-reviews .card-review .user-info .nombre-user {
+    padding: 10px;
+}
+
+.region-2 .container-reviews .card-review .user-info .nombre-user p {
+    font-size: calc(15px + 0.5vw);
+}
+
+.region-2 .container-reviews .card-review .descripcion-user {
+    padding: 10px;
 }
 
 .overlay-p {
