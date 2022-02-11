@@ -16,14 +16,14 @@
 </head>
 <body>
     <div>
-        <form action="{{url('crear')}}" method="GET">
-            <button class="btn btn-primary" type="submit" name="Crear" value="Crear">Crear</button>
+        <form action="{{url('mostrar')}}" method="GET">
+            <button class="btn btn-primary" type="submit" name="Back" value="Back">Back</button>
+        </form>
+        <form action="{{url('crearUser')}}" method="GET">
+            <button class="btn btn-primary" type="submit" name="Crear" value="Crear">Crear Usuario</button>
         </form>
         <form action="{{url('logout')}}" method="GET">
             <button id="logout" class="btn btn-dark" type="submit" name="logout" value="logout">Logout</button>
-        </form>
-        <form action="{{url('mostrarUser')}}" method="GET">
-            <button id="logout" class="btn btn-dark" type="submit" name="logout" value="logout">Administrar usuarios</button>
         </form>
     </div>
     <div class="mostrar">
@@ -32,39 +32,31 @@
                     <tr class="active">
                         <th>ID</th>
                         <th>NOMBRE</th>
-                        <th>CIUDAD</th>
-                        <th>DIRECCION</th>
-                        <th>UBICACION</th>
+                        <th>APELLIDO</th>
+                        <th>EMAIL</th>
                         <th>TELEFONO</th>
-                        <th>PRECIO CARTA</th>
                         <th>FOTO</th>
-                        <th>GERENTE</th>
-                        <th>TIPO DE RESTAURANTE</th>
-                        <th>CODIGO POSTAL</th>
+                        <th>ROL</th>
                         <th>ELIMINAR</th>
                         <th>MODIFICAR</th>
                     </tr>
-                @foreach($listaRestaurante as $restaurante)
+                @foreach($listaUsuario as $usuario)
                     <tr>
-                        <td>{{$restaurante->id_resta}}</td>
-                        <td>{{$restaurante->nom_resta}}</td>
-                        <td>{{$restaurante->ciudad_resta}}</td>
-                        <td>{{$restaurante->direccion_resta}}</td>
-                        <td>{{$restaurante->ubi_resta}}</td>
-                        <td>{{$restaurante->telf_resta}}</td>
-                        <td>{{$restaurante->precio_resta}}</td>
-                        <td style="padding: auto; text-align: center"><img src="{{asset('storage/restaurantes')."/".$restaurante->foto_resta}}" width="100"></td>
-                        <td>{{$restaurante->nombre_usu}}</td>
-                        <td>{{$restaurante->nom_tipo}}</td>
-                        <td>{{$restaurante->cp_resta}}</td>
-                        <td><form action="{{url('eliminarRestaurante/'.$restaurante->id_resta)}}" method="POST">
+                        <td>{{$usuario->id_usu}}</td>
+                        <td>{{$usuario->nombre_usu}}</td>
+                        <td>{{$usuario->apellido_usu}}</td>
+                        <td>{{$usuario->email_usu}}</td>
+                        <td>{{$usuario->telf_usu}}</td>
+                        <td style="padding: auto; text-align: center"><img src="{{asset('storage')."/".$usuario->foto_usu}}" width="100"></td>
+                        <td>{{$usuario->nom_rol}}</td>
+                        <td><form action="{{url('eliminarUsuario/'.$usuario->id_usu)}}" method="POST">
                             @csrf
                             <!--{{csrf_field()}}--->
                             {{method_field('DELETE')}}
                             <!--@method('DELETE')--->
                             <button class="btn btn-outline-danger" type="submit" name="Eliminar" value="Eliminar">Eliminar</button>
                         </form></td>
-                        <td><form action="{{url('modificarRestaurante/'.$restaurante->id_resta)}}" method="GET">
+                        <td><form action="{{url('modificarUsuario/'.$usuario->id_usu)}}" method="GET">
                             <button class="btn btn-outline-secondary" type="submit" name="Modificar" value="Modificar">Modificar</button>
                         </form></td>
                     </tr>

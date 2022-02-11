@@ -69,16 +69,23 @@ function filter_data() { //FUNCION PRINCIPAL
 
         if (ajax.readyState == 4 && ajax.status == 200) {
             var respuesta = JSON.parse(this.responseText);
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
             var recarga = '';
             /* Leerá la respuesta que es devuelta por el controlador: */
             for (let i = 0; i < respuesta.length; i++) {
+                var nota = getRandomInt(1, 6);
                 recarga += `<div class="item-restaurant">
+                                <a href="fichaRestaurante/` + respuesta[i].id_resta + `"></a>
                                 <img src="storage/restaurantes/` + respuesta[i].foto_resta + `" alt="foto-[introducir nombre restaurante]" class="foto-restaurante">
                                 <div class="info-restaurante">
                                     <h4>` + respuesta[i].nom_resta + `</h4>
                                     <h6>` + respuesta[i].nom_tipo + `</h6>
                                     <h6>` + respuesta[i].ciudad_resta + `</h6>
-                                    <small>4.5</small>
+                                    <h6>` + respuesta[i].precio_resta + `</h6>
+                                    <small>` + nota + `</small>
                                 </div>
                             </div>`;
             }

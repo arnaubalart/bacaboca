@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RestauranteController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,3 +50,16 @@ Route::get('/fichaRestaurante/{id}', [RestauranteController::class, 'fichaRestau
 
 /*Crear review*/
 Route::post('/creaReview', [RestauranteController::class, 'creaReview']);
+
+
+/*------------------Usuarios------------------*/
+/*Crear*/
+Route::get('/crearUser',[UsuarioController::class, 'crearUsuario']);
+
+Route::post('/crearUser',[UsuarioController::class, 'crearUsuarioPost']);
+
+/*Mostrar*/
+Route::get('mostrarUser',[UsuarioController::class, 'mostrarUsuario']);
+
+/*Eliminar*/
+Route::delete('/eliminarUsuario/{id}', [UsuarioController::class, 'eliminarUsuario']);

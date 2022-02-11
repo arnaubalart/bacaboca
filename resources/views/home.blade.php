@@ -29,9 +29,7 @@
 
 <body>
     <nav class="sidenav">
-        <ul>
-            <li></li>
-        </ul>
+        <a class="twitter-timeline" data-width="300" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/UberEats?ref_src=twsrc%5Etfw">Tweets by UberEats</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </nav>
     <menu class="menu">
         <div class="container-menu">
@@ -45,6 +43,7 @@
                   </button>
             </div>
             <div class="logo flex-cv">
+                <a href="{{url('/')}}"></a>
                 <img src="{{asset('storage/logo/baca.gif')}}" alt="LogoBacaBoca">
             </div>
             <div class="toggle">
@@ -58,7 +57,19 @@
             </div>
 
             <div class="login flex-cv">
-                <button type="button" class="btn-abrirPop">Login</button>
+                @if (Session::get('nombre_admin') || Session::get('nombre_cliente'))
+                <a href="{{url('logout')}}">
+                    <button type="button" >Logout</button>
+                </a>
+                @else
+                <a href="{{url('login')}}">
+                    <button type="button" >Login</button>
+                </a>
+                <a href="{{url('crearUser')}}">
+                    <button type="button">Register</button>
+                </a>
+                @endif
+
             </div>
         </div>
     </menu>

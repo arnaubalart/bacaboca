@@ -1,3 +1,7 @@
+//ESTE SCRIPT NO SE USA, SI DA TIEMPO SE IMPLEMENTA
+
+
+
 function objetoAjax() {
     var xmlhttp = false;
     try {

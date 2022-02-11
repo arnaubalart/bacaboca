@@ -29,6 +29,8 @@ class RestauranteController extends Controller
             $rol = DB::table("tbl_user")->select('id_rol_fk')->where('email_usu','=',$datos['email_usu'])->where('contra_usu','=',MD5($datos['contra_usu']))->first();
             if($rol->id_rol_fk == 1){
                 $request->session()->put('nombre_admin',$request->email_usu);
+            }elseif($rol->id_rol_fk == 2){
+                $request->session()->put('nombre_cliente',$request->email_usu);
             }
             return redirect('/mostrar');
         }else{
@@ -172,4 +174,6 @@ class RestauranteController extends Controller
         }
         return Redirect::to('fichaRestaurante/'.$datos['id_resta']);
     }
+
+
 }
