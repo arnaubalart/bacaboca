@@ -82,7 +82,7 @@
     box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.5);
 }
 
-:root {
+ :root {
     --first-color: #19c673;
     --second-color: #05a357;
     --third-color: #f6f0ea;
@@ -111,18 +111,18 @@
 
 
 /*  MIXINS
-========================================== */
+  ========================================== */
 
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 20px;
 }
 
-::-webkit-scrollbar-thumb {
+ ::-webkit-scrollbar-thumb {
     background: var(--first-color);
     border-radius: 1px;
 }
 
-::-webkit-scrollbar-track {
+ ::-webkit-scrollbar-track {
     background-color: var(--third-color);
 }
 

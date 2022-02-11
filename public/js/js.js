@@ -51,8 +51,23 @@ $(document).ready(function() {
 
 
 
-    var map = L.map('map').setView([41.405143642716084, 2.149759037596462], 13);
+    /*     var map = L.map('map').setView([41.405143642716084, 2.149759037596462], 13);
 
+        L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+            attribution: 'El isi',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'your.mapbox.access.token'
+        }).addTo(map); */
+
+});
+
+$(".region-tipo .ubicacion").ready(function() {
+    var ubi = $(".ubi-flea").text();
+    var ubi = ubi.split(",");
+    var map = L.map('map').setView([ubi[0], ubi[1]], 16);
     L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
         attribution: 'El isi',
         maxZoom: 18,
@@ -61,5 +76,5 @@ $(document).ready(function() {
         zoomOffset: -1,
         accessToken: 'your.mapbox.access.token'
     }).addTo(map);
-
+    var marker = L.marker([ubi[0], ubi[1]]).addTo(map);
 });

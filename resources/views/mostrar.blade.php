@@ -22,6 +22,9 @@
         <form action="{{url('logout')}}" method="GET">
             <button id="logout" class="btn btn-dark" type="submit" name="logout" value="logout">Logout</button>
         </form>
+        <form action="{{url('mostrarUser')}}" method="GET">
+            <button id="logout" class="btn btn-dark" type="submit" name="logout" value="logout">Administrar usuarios</button>
+        </form>
     </div>
     <div class="mostrar">
         <div class="row flex-cv">

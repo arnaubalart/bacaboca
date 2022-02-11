@@ -13,8 +13,10 @@
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.0/src/js.cookie.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    {{-- <link rel="stylesheet" href="css/owl.theme.default.min.css"> --}}
     <script src="js/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    {{-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script> --}}
     <!-- sweetalert-->
     <script type="text/javascript" src="js/iconos_g.js"></script>
     <!-- iconos FontAwesome-->
@@ -27,9 +29,7 @@
 
 <body>
     <nav class="sidenav">
-        <ul>
-            <li></li>
-        </ul>
+        <a class="twitter-timeline" data-width="300" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/UberEats?ref_src=twsrc%5Etfw">Tweets by UberEats</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </nav>
     <menu class="menu">
         <div class="container-menu">
@@ -43,27 +43,46 @@
                   </button>
             </div>
             <div class="logo flex-cv">
+                <a href="{{url('/')}}"></a>
                 <img src="{{asset('storage/logo/baca.gif')}}" alt="LogoBacaBoca">
             </div>
             <div class="toggle">
 
             </div>
-            <div class="search-top">
-                <svg width="24px" height="24px" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M17.5834 5.16602C14.5001 2.08268 9.50008 2.08268 6.41675 5.16602C3.33341 8.24935 3.33341 13.3327 6.41675 16.416L12.0001 21.9993L17.5834 16.3327C20.6667 13.3327 20.6667 8.24935 17.5834 5.16602ZM12.0001 12.416C11.0834 12.416 10.3334 11.666 10.3334 10.7493C10.3334 9.83268 11.0834 9.08268 12.0001 9.08268C12.9167 9.08268 13.6667 9.83268 13.6667 10.7493C13.6667 11.666 12.9167 12.416 12.0001 12.416Z" fill="#000000"></path></svg>
-                <input class="input-search-top" type="text" placeholder="Introduce qué restaurante quieres" id="filtro" onkeyup="filter_data()">
+            <div class="container-search-top">
+                <div class="search-top">
+                    <svg width="24px" height="24px" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M17.5834 5.16602C14.5001 2.08268 9.50008 2.08268 6.41675 5.16602C3.33341 8.24935 3.33341 13.3327 6.41675 16.416L12.0001 21.9993L17.5834 16.3327C20.6667 13.3327 20.6667 8.24935 17.5834 5.16602ZM12.0001 12.416C11.0834 12.416 10.3334 11.666 10.3334 10.7493C10.3334 9.83268 11.0834 9.08268 12.0001 9.08268C12.9167 9.08268 13.6667 9.83268 13.6667 10.7493C13.6667 11.666 12.9167 12.416 12.0001 12.416Z" fill="#000000"></path></svg>
+                    <input class="input-search-top" type="text" placeholder="Introduce qué restaurante quieres" id="filtro" onkeyup="filter_data()">
+                </div>
             </div>
+
             <div class="login flex-cv">
-                <button type="button">Login</button>
+                @if (Session::get('nombre_admin') || Session::get('nombre_cliente'))
+                <a href="{{url('logout')}}">
+                    <button type="button" >Logout</button>
+                </a>
+                @else
+                <a href="{{url('login')}}">
+                    <button type="button" >Login</button>
+                </a>
+                <a href="{{url('crearUser')}}">
+                    <button type="button">Register</button>
+                </a>
+                @endif
+
             </div>
         </div>
     </menu>
     <header class="header">
-        <div class="bg-svg left">
-            <img src="{{asset('storage/banners/burgersleft.svg')}}" alt="">
+        <div class="bg-header">
+            <div class="bg-svg left">
+                <img src="{{asset('storage/banners/burgersleft.svg')}}" alt="">
+            </div>
+            <div class="bg-svg right">
+                <img src="{{asset('storage/banners/burgersRIGHT.svg')}}" alt="">
+            </div>
         </div>
-        <div class="bg-svg right">
-            <img src="{{asset('storage/banners/burgersRIGHT.svg')}}" alt="">
-        </div>
+
         <div class="search-header">
             <svg width="24px" height="24px" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M17.5834 5.16602C14.5001 2.08268 9.50008 2.08268 6.41675 5.16602C3.33341 8.24935 3.33341 13.3327 6.41675 16.416L12.0001 21.9993L17.5834 16.3327C20.6667 13.3327 20.6667 8.24935 17.5834 5.16602ZM12.0001 12.416C11.0834 12.416 10.3334 11.666 10.3334 10.7493C10.3334 9.83268 11.0834 9.08268 12.0001 9.08268C12.9167 9.08268 13.6667 9.83268 13.6667 10.7493C13.6667 11.666 12.9167 12.416 12.0001 12.416Z" fill="#000000"></path></svg>
             <input class="input-search-header" type="text" placeholder="Introduce qué restaurante quieres" onkeyup="filter_data()">
@@ -121,56 +140,6 @@
         <h2>Los Restaurantes</h2>
         <div class="container-list-restaurantes">
             <div class="grid-restaurantes" id="container-restaurantes">
-                <div class="item-restaurant">
-                    <img src="{{asset('storage/restaurantes/lospolloshermanos.png')}}" alt="foto-[introducir nombre restaurante]" class="foto-restaurante">
-                    <div class="info-restaurante">
-                        <h4>Los Pollos hermanos</h4>
-                        <h6>Comida mejicana</h6>
-                        <h6>Nuevo mejico, calle gustavo con Heisenberg</h6>
-                        <small>4.5</small>
-                    </div>
-
-                </div>
-                <div class="item-restaurant">
-                    <img src="{{asset('storage/restaurantes/lospolloshermanos.png')}}" alt="foto-[introducir nombre restaurante]" class="foto-restaurante">
-                    <div class="info-restaurante">
-                        <h4>Los Pollos hermanos</h4>
-                        <h6>Comida mejicana</h6>
-                        <h6>Nuevo mejico, calle gustavo con Heisenberg</h6>
-                        <small>4.5</small>
-                    </div>
-
-                </div>
-                <div class="item-restaurant">
-                    <img src="{{asset('storage/restaurantes/lospolloshermanos.png')}}" alt="foto-[introducir nombre restaurante]" class="foto-restaurante">
-                    <div class="info-restaurante">
-                        <h4>Los Pollos hermanos</h4>
-                        <h6>Comida mejicana</h6>
-                        <h6>Nuevo mejico, calle gustavo con Heisenberg</h6>
-                        <small>4.5</small>
-                    </div>
-
-                </div>
-                <div class="item-restaurant">
-                    <img src="{{asset('storage/restaurantes/lospolloshermanos.png')}}" alt="foto-[introducir nombre restaurante]" class="foto-restaurante">
-                    <div class="info-restaurante">
-                        <h4>Los Pollos hermanos</h4>
-                        <h6>Comida mejicana</h6>
-                        <h6>Nuevo mejico, calle gustavo con Heisenberg</h6>
-                        <small>4.5</small>
-                    </div>
-
-                </div>
-                <div class="item-restaurant">
-                    <img src="{{asset('storage/restaurantes/lospolloshermanos.png')}}" alt="foto-[introducir nombre restaurante]" class="foto-restaurante">
-                    <div class="info-restaurante">
-                        <h4>Los Pollos hermanos</h4>
-                        <h6>Comida mejicana</h6>
-                        <h6>Nuevo mejico, calle gustavo con Heisenberg</h6>
-                        <small>4.5</small>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>
@@ -178,6 +147,17 @@
     <footer class=""></footer>
 
     <div class="overlay"></div>
+    <div class="overlay-p">
+        <div class="popup" id="popup">
+            <a href="#" id="btn-cerrar-popup" class="btn-cerrarPop"><i class="fas fa-times"></i></a>
+            <h3>Iniciar sessión <span class="numeroEj"></span></h3>
+            <div class="contenedor-popup">
+                <div class="ejercicio-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

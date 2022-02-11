@@ -23,6 +23,7 @@
     <script type="text/javascript" src="../js/js.js"></script>
     <link rel="icon" type="image/png" href="../img/icon.png">
     <link rel="stylesheet" href="../css/styles.css">
+    <script async src='/cdn-cgi/bm/cv/669835187/api.js'></script>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
                   </button>
             </div>
             <div class="logo flex-cv">
-                <img src="../../public/storage/web/logo/baca.gif" alt="LogoBacaBoca">
+                <img src="../../public/storage/logo/baca.gif" alt="LogoBacaBoca">
             </div>
             <div class="toggle">
 
@@ -63,41 +64,52 @@
         <div class="bg-header">
             <div class="bg-svg all-width">
                 <!-- poner la imagen y el alt -->
-                <img src="../../public/storage/web/restaurantes/lospolloshermanos.png" alt="lospolloshermanos">
+                <img src="../../public/storage/restaurantes/lospolloshermanos.png" alt="lospolloshermanos">
             </div>
         </div>
     </header>
     <div class="content region-tipo">
         <div class="info-resta">
-            <div class="container-info "></div>
-            <div class="nombre-resta">
-                <!-- Poner el nombre resta -->
-                <h2>Los Pollos Hermanos</h2>
-            </div>
+            <div class="container-info ">
+                <div class="nombre-resta">
+                    <!-- Poner el nombre resta -->
+                    <h2>Los Pollos Hermanos</h2>
+                </div>
 
-            <div class="more-info-resta">
-                <!-- Poner nota resta -->
-                <div class="nota">
-                    <p>9.3</p>
+                <div class="more-info-resta">
+                    <!-- Poner nota resta -->
+                    <div class="nota">
+                        <p>9.3</p>
+                    </div>
+                    <!-- Poner tipo resta -->
+                    <div class="tipo-resta">
+                        <p>Comida mejicana</p>
+                    </div>
+                    <!-- Poner precio resta -->
+                    <div class="precio">
+                        <p>€€€</p>
+                    </div>
                 </div>
-                <!-- Poner tipo resta -->
-                <div class="tipo-resta">
-                    <p>Comida mejicana</p>
+                <div class="descripcion">
+                    <h3>Descripción</h3>
+                    <!-- poner descripcion del restaurante en cuestion -->
+                    <p>Tempus imperdiet nulla malesuada pellentesque elit eget gravida cum sociis. Magna ac placerat vestibulum lectus mauris ultrices eros in cursus. Lorem mollis aliquam ut porttitor leo a diam. Urna et pharetra pharetra massa massa ultricies.
+                        Integer enim neque volutpat ac tincidunt vitae semper quis. Quis commodo odio aenean sed adipiscing diam donec. Nunc sed id semper risus. </p>
                 </div>
-                <!-- Poner precio resta -->
-                <div class="precio">
-                    <p>€€€</p>
+                <div class="telf">
+                    <a href="tel:987453624">987453624</a>
                 </div>
-            </div>
-            <div class="descripcion">
-                <h3>Descripción</h3>
-                <!-- poner descripcion del restaurante en cuestion -->
-                <p>Restaurante de comida mejicana y de pollo. Gustavo frinn es el dueño, etc etc. Lorem ipsum</p>
+                <div class="direccion">
+                    <div class="direccion resta">
+                        <p>C/ de Provença, 357, local 2, 08037 Barcelona</p>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="ubicacion">
             <!-- Passar con una cookie las cordenadas del mapa. La cookie se llamara ubiMap-->
-            <span class="hide">ubicacion</span>
+            <span class="hide ubi-flea">41.39494098069443, 2.175341092132802</span>
             <div class="container-mapa">
                 <div class="mapa" id="map">
 
@@ -111,6 +123,10 @@
 
     <div class="region-2">
         <div class="container-reviews">
+            <div class="bg">
+                <div class="left"></div>
+                <div class="right"></div>
+            </div>
             <!--Recordar de passar las fk del id del usuario y la fk del id restaurante-->
             <form class="formulario-review" action="">
                 <h2>Escriba aqui su valoración</h2>
@@ -123,7 +139,7 @@
                   oninput="this.style.setProperty('--value', this.value)"
                   step="0.5"
                   type="range"
-                  value="1">
+                 >
               </label>
                 <label for="textarea"> Descripcion</label>
                 <textarea name="textarea" id="" cols="30" rows="10" resize="false"></textarea>
@@ -131,10 +147,94 @@
             </form>
 
             <div class="card-review">
-                <div class="nota-resta"></div>
-                <div class="foto-user"></div>
-                <div class="nombre-user"></div>
-                <div class="descripcion-review"></div>
+                <div class="user-info">
+                    <div class="foto-user">
+                        <i class="fad fa-user-alien"></i>
+                    </div>
+                    <div class="nombre-user">
+                        <p>Marc Ortiz</p>
+                    </div>
+                </div>
+                <div class="nota-resta">
+                    <label class="rating-label">
+                        <input
+                          class="rating"
+                          max="5"
+                          min="0"
+                          oninput="this.style.setProperty('--value', this.value)"
+                          step="0.5"
+                          type="range"
+                          value="3.5"
+                          style="--value:3.5;"
+                          disabled>
+                    </label>
+                </div>
+                <div class="descripcion-review">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>
+            <div class="card-review">
+                <div class="user-info">
+                    <div class="foto-user">
+                        <i class="fad fa-user-astronaut"></i>
+                    </div>
+                    <div class="nombre-user">
+                        <p>Arnau Balart</p>
+                    </div>
+                </div>
+                <div class="nota-resta">
+                    <label class="rating-label">
+                        <input
+                          class="rating"
+                          max="5"
+                          min="0"
+                          oninput="this.style.setProperty('--value', this.value)"
+                          step="0.5"
+                          type="range"
+                          value="3.5"
+                          style="--value:3.5;"
+                          disabled>
+                    </label>
+                </div>
+                <div class="descripcion-review">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>
+            <div class="card-review">
+                <div class="user-info">
+                    <div class="foto-user">
+                        <i class="fad fa-user-cowboy"></i>
+                    </div>
+                    <div class="nombre-user">
+                        <p>Agnes Planas</p>
+                    </div>
+                </div>
+                <div class="nota-resta">
+                    <label class="rating-label">
+                        <input
+                          class="rating"
+                          max="5"
+                          min="0"
+                          oninput="this.style.setProperty('--value', this.value)"
+                          step="0.5"
+                          type="range"
+                          value="3.5"
+                          style="--value:3.5;"
+                          disabled>
+                    </label>
+                </div>
+                <div class="descripcion-review">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -153,6 +253,7 @@
         </div>
     </div>
 
+    <!-- <script type="text/javascript">(function(){window['__CF$cv$params']={r:'6db892811dab3a4d',m:'nLERZ3LL1gU0GEydoxw6YCeDH3m4i6YGkoiwva85YHQ-1644530027-0-AdE4TgI6SzrtSODevM99p2LfYclzNOfncyG22E61ZiPHNx8cLYgTtlJN2Z0RMTJdcA2hqbgRBl7mZ9rMXELMvgulmY+bwUKLM4QvCFIWMIOpuF4sHKRT9VamkvxqOYUVBsFNNEgXspwLeA+dUU3EslOHCzpGPWsUlpkc3owmDjCb0BBCJZk6gCZq8ukup+63oKkVUg3H3Vi5LaPNAyUio0Y=',s:[0x6fdedb737f,0xfe32560292],}})();</script> -->
 </body>
 
 </html>
